@@ -38,14 +38,16 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-card transition-all duration-300" id="navbar">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <span class="font-bold text-xl tracking-tight text-white"><i class="fa-solid fa-chart-line text-brand-accent mr-2"></i>Trader's Blueprint</span>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-6">
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#psychology" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Psychology</a>
                         <a href="#math" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Math of Survival</a>
                         <a href="#pitfalls" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Pitfalls</a>
+                        <a href="#execution" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Execution</a>
+                        <a href="#low-capital" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Low Capital Plan</a>
                         <a href="#action" class="bg-brand-accent text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
                     </div>
                 </div>
@@ -90,33 +92,60 @@
             <h2 class="text-3xl font-bold">Phase 1: The Psychology of a Survivor</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-blue/50 transition-all fade-in">
                 <div class="text-brand-blue text-2xl mb-4"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                <h3 class="text-xl font-bold mb-3">Reframe Losses as "Expenses"</h3>
-                <p class="text-slate-400 text-sm mb-4">In your corporate job, the company spends money to make money. In trading, losing trades are just your business expenses.</p>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-sm">
-                    <span class="text-brand-accent font-bold"><i class="fa-solid fa-check mr-2"></i>The Fix:</span> Accept that a 50% win rate is highly profitable if winners outsize losers.
-                </div>
+                <h3 class="text-lg font-bold mb-3">Reframe Losses</h3>
+                <p class="text-slate-400 text-sm mb-4">In corporate, the company spends money to make money. In trading, losing trades are just your business expenses, not personal failures.</p>
             </div>
 
-            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-warning/50 transition-all fade-in" style="transition-delay: 100ms;">
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-blue/50 transition-all fade-in" style="transition-delay: 100ms;">
+                <div class="text-brand-blue text-2xl mb-4"><i class="fa-solid fa-hourglass-half"></i></div>
+                <h3 class="text-lg font-bold mb-3">Paid for Patience</h3>
+                <p class="text-slate-400 text-sm mb-4">In a corporate job, you get paid for being busy and putting in time. In trading, you get paid strictly for waiting for the right setup.</p>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-warning/50 transition-all fade-in" style="transition-delay: 200ms;">
                 <div class="text-brand-warning text-2xl mb-4"><i class="fa-solid fa-fire-flame-curved"></i></div>
-                <h3 class="text-xl font-bold mb-3">The Two Deadly Sins</h3>
-                <ul class="text-slate-400 text-sm space-y-3">
-                    <li><strong class="text-white">FOMO:</strong> Buying at the top because you feel left behind. <br><em class="text-brand-warning">Rule: Missed the setup? Wait for the next train.</em></li>
-                    <li><strong class="text-white">Revenge Trading:</strong> Doubling down immediately after a loss to "win it back". <br><em class="text-brand-warning">Rule: Two losses in a day? Shut the laptop.</em></li>
+                <h3 class="text-lg font-bold mb-3">The Deadly Sins</h3>
+                <p class="text-slate-400 text-sm mb-4"><strong>FOMO:</strong> Buying at the top. Missed it? Wait for the next train.<br><br><strong>Revenge Trading:</strong> Doubling down to win it back. Two losses = shut laptop.</p>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-500/50 transition-all fade-in" style="transition-delay: 300ms;">
+                <div class="text-slate-400 text-2xl mb-4"><i class="fa-solid fa-mug-hot"></i></div>
+                <h3 class="text-lg font-bold mb-3">The "Boredom" Indicator</h3>
+                <p class="text-slate-400 text-sm">Good trading is boring. If your heart is racing and palms are sweating, you are gambling, not trading. Embrace the boredom.</p>
+            </div>
+        </div>
+
+        <!-- Gambler vs Trader Comparison -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in mb-10">
+            <div class="bg-brand-warning/5 border border-brand-warning/30 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-brand-warning mb-4"><i class="fa-solid fa-dice mr-2"></i>Gambler Traits (The 90%)</h3>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li><i class="fa-solid fa-xmark text-brand-warning mr-2"></i> Needs constant action & excitement</li>
+                    <li><i class="fa-solid fa-xmark text-brand-warning mr-2"></i> Reacts emotionally to every price tick</li>
+                    <li><i class="fa-solid fa-xmark text-brand-warning mr-2"></i> Trades randomly without a strict plan</li>
+                    <li><i class="fa-solid fa-xmark text-brand-warning mr-2"></i> Revenge trades immediately after a loss</li>
+                    <li><i class="fa-solid fa-xmark text-brand-warning mr-2"></i> Chases huge, unrealistic home-run wins</li>
                 </ul>
             </div>
-
-            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-500/50 transition-all fade-in" style="transition-delay: 200ms;">
-                <div class="text-slate-400 text-2xl mb-4"><i class="fa-solid fa-mug-hot"></i></div>
-                <h3 class="text-xl font-bold mb-3">The "Boredom" Indicator</h3>
-                <p class="text-slate-400 text-sm">Good trading is actually boring. You wait hours or days for a setup, click, and do nothing.</p>
-                <div class="mt-4 p-3 bg-brand-warning/10 rounded border border-brand-warning/20 text-brand-warning text-sm font-medium">
-                    If your heart is racing and palms are sweating... you are gambling, not trading.
-                </div>
+            <div class="bg-brand-accent/5 border border-brand-accent/30 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-brand-accent mb-4"><i class="fa-solid fa-chess-knight mr-2"></i>Trader Traits (The 10%)</h3>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li><i class="fa-solid fa-check text-brand-accent mr-2"></i> Loves boredom and waiting for setups</li>
+                    <li><i class="fa-solid fa-check text-brand-accent mr-2"></i> Emotionally detached from the outcome</li>
+                    <li><i class="fa-solid fa-check text-brand-accent mr-2"></i> Strictly follows the pre-defined plan</li>
+                    <li><i class="fa-solid fa-check text-brand-accent mr-2"></i> Accepts losses quickly as a business cost</li>
+                    <li><i class="fa-solid fa-check text-brand-accent mr-2"></i> Focuses on slow, steady account growth</li>
+                </ul>
             </div>
+        </div>
+
+        <!-- Mark Douglas Quote -->
+        <div class="bg-brand-card/50 border-l-4 border-brand-blue p-6 rounded-r-xl fade-in">
+            <h4 class="text-brand-blue font-bold text-sm uppercase tracking-wider mb-2">The 90% Rule (Mark Douglas)</h4>
+            <p class="text-slate-300 italic">"90% of trading is psychology, 10% is strategy. You can have the absolute best technical strategy in the world, but if your psychology is weak, you will lose money."</p>
         </div>
     </section>
 
@@ -130,37 +159,77 @@
                 <h2 class="text-3xl font-bold">Phase 2: The Math of Survival</h2>
             </div>
             
-            <p class="text-slate-400 mb-10 max-w-3xl fade-in">This is the most important section. If you follow these mathematical rules, it is mathematically near-impossible for you to go bankrupt.</p>
+            <p class="text-slate-400 mb-8 max-w-3xl fade-in">This is the most important section. If you follow these mathematical rules, it is mathematically near-impossible for you to go bankrupt.</p>
+
+            <!-- Metrics Bar -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 fade-in">
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-700 text-center shadow-lg">
+                    <div class="text-3xl font-extrabold text-brand-accent mb-1">1 - 2%</div>
+                    <div class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Max Risk Per Trade</div>
+                </div>
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-700 text-center shadow-lg">
+                    <div class="text-3xl font-extrabold text-brand-blue mb-1">1:2</div>
+                    <div class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Min Risk / Reward</div>
+                </div>
+                <div class="bg-brand-card p-6 rounded-xl border border-slate-700 text-center shadow-lg">
+                    <div class="text-3xl font-extrabold text-brand-warning mb-1">5%</div>
+                    <div class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Max Weekly Drawdown</div>
+                </div>
+            </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <!-- Rule of Ruin -->
-                <div class="fade-in">
-                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fa-solid fa-chart-pie text-slate-500 mr-2"></i> The Asymmetry of Loss</h3>
-                    <p class="text-sm text-slate-400 mb-6">Math works against you when you lose. Never let a small loss turn into a big loss.</p>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
-                            <span class="text-brand-warning font-bold">If you lose 10%</span>
-                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                            <span class="text-brand-accent font-bold">You need +11% to break even</span>
+                <!-- Left Column -->
+                <div class="space-y-8">
+                    <!-- Rule of Ruin -->
+                    <div class="fade-in">
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fa-solid fa-chart-pie text-slate-500 mr-2"></i> The Asymmetry of Loss</h3>
+                        <p class="text-sm text-slate-400 mb-4">Math works against you when you lose. Never let a small loss turn into a big loss.</p>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
+                                <span class="text-brand-warning font-bold">If you lose 10%</span>
+                                <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                                <span class="text-brand-accent font-bold">You need +11% to break even</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
+                                <span class="text-brand-warning font-bold">If you lose 25%</span>
+                                <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                                <span class="text-brand-accent font-bold">You need +33% to break even</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-brand-warning/10 p-4 rounded-lg border border-brand-warning/30">
+                                <span class="text-brand-warning font-bold">If you lose 50%</span>
+                                <i class="fa-solid fa-arrow-right text-brand-warning"></i>
+                                <span class="text-brand-warning font-bold">You need +100% to break even!</span>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
-                            <span class="text-brand-warning font-bold">If you lose 25%</span>
-                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                            <span class="text-brand-accent font-bold">You need +33% to break even</span>
-                        </div>
-                        <div class="flex justify-between items-center bg-brand-warning/10 p-4 rounded-lg border border-brand-warning/30">
-                            <span class="text-brand-warning font-bold">If you lose 50%</span>
-                            <i class="fa-solid fa-arrow-right text-brand-warning"></i>
-                            <span class="text-brand-warning font-bold">You need +100% to break even!</span>
-                        </div>
+                    </div>
+
+                    <!-- Extra Risk Rules -->
+                    <div class="fade-in bg-brand-card p-6 rounded-xl border border-slate-800">
+                        <h3 class="text-lg font-bold mb-3 text-white">Advanced Survival Rules</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-shield text-brand-blue mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-white block">Max Drawdown Limit (5% per week)</strong>
+                                    <span class="text-slate-400 text-sm">If you lose 5% of your total capital in a single week, you stop trading for the rest of the week. Period. Go back to paper trading to reset your mind.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-lock text-brand-warning mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-white block">Never Move Your Stop Loss</strong>
+                                    <span class="text-slate-400 text-sm">Once a trade is entered, your Stop Loss is concrete. The only time you move a stop loss is to move it up to lock in profits, never backwards to "give it room".</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- 1% Rule -->
+                <!-- Right Column: 1% Rule -->
                 <div class="fade-in" style="transition-delay: 150ms;">
-                    <div class="bg-gradient-to-br from-brand-card to-slate-900 p-8 rounded-2xl border border-brand-accent/30 shadow-[0_0_30px_rgba(16,185,129,0.1)] relative overflow-hidden">
+                    <div class="bg-gradient-to-br from-brand-card to-slate-900 p-8 rounded-2xl border border-brand-accent/30 shadow-[0_0_30px_rgba(16,185,129,0.1)] relative overflow-hidden h-full">
                         <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl"><i class="fa-solid fa-percent"></i></div>
-                        <h3 class="text-2xl font-bold text-white mb-2">The Golden 1% Rule</h3>
+                        <h3 class="text-2xl font-bold text-white mb-2">Position Sizing: The Core</h3>
                         <p class="text-brand-accent font-semibold mb-6">Never risk more than 1% to 2% of your Total Capital on a single trade.</p>
                         
                         <div class="bg-slate-950/50 rounded-lg p-5 font-mono text-sm border border-slate-800">
@@ -169,9 +238,10 @@
                             <div class="w-full h-px bg-slate-800 my-3"></div>
                             <div class="mb-1"><span class="text-brand-blue">Setup:</span> Buy at ₹100, Stop Loss at ₹95</div>
                             <div class="mb-1"><span class="text-brand-blue">Risk per share:</span> ₹5</div>
-                            <div class="mb-3"><span class="text-brand-blue">Math:</span> ₹1,000 ÷ ₹5 = 200 shares</div>
-                            <div class="bg-brand-accent/20 text-brand-accent p-2 rounded text-xs">
-                                <strong>Result:</strong> If stopped out, you lose exactly ₹1,000 and live to trade tomorrow.
+                            <div class="mb-3"><span class="text-brand-blue">Math:</span> ₹1,000 ÷ ₹5 = <span class="text-white font-bold">200 shares</span></div>
+                            <div class="bg-brand-accent/20 text-brand-accent p-3 rounded text-xs leading-relaxed border border-brand-accent/30">
+                                <strong>Formula:</strong> Position Size = (Risk Amount) ÷ (Entry Price - Stop Loss Price)<br><br>
+                                <strong>Result:</strong> By buying exactly 200 shares, if you are stopped out at ₹95, you lose exactly ₹1,000 and live to trade tomorrow.
                             </div>
                         </div>
                         
@@ -179,7 +249,7 @@
                             <i class="fa-solid fa-scale-balanced text-brand-accent mt-1 mr-3"></i>
                             <div>
                                 <strong class="text-white block">Aim for 1:2 Risk/Reward (R:R)</strong>
-                                <span class="text-slate-400">If risking ₹1,000, target ₹2,000. This way, you can be wrong 50% of the time and still grow your account.</span>
+                                <span class="text-slate-400">If risking ₹1,000, your target must be at least ₹2,000. With a 1:2 R:R, you can be wrong 50% of the time and still grow your account.</span>
                             </div>
                         </div>
                     </div>
@@ -218,61 +288,339 @@
         </div>
     </section>
 
-    <!-- Phase 4: Action Plan -->
+    <!-- Phase 4: Execution & Analysis -->
+    <section id="execution" class="py-16 bg-brand-card/30 border-y border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-10 fade-in">
+                <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-list-check text-brand-blue text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold">Phase 4: Pre-Trade Execution</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- How to Analyze -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-6 text-white border-b border-slate-700 pb-2">How to Analyze a Trade (Before Entering)</h3>
+                    <ul class="space-y-6">
+                        <li class="flex">
+                            <div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center mr-4 shrink-0 mt-1"><i class="fa-solid fa-arrow-trend-up text-brand-accent"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">1. The Trend is Your Friend</h4>
+                                <p class="text-sm text-slate-400">Don't fight the overall market trend. If the market is bleeding, don't try to catch falling knives.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center mr-4 shrink-0 mt-1"><i class="fa-solid fa-layer-group text-brand-blue"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">2. Support & Resistance</h4>
+                                <p class="text-sm text-slate-400">Identify key levels where price has historically reacted, bounced, or rejected.</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center mr-4 shrink-0 mt-1"><i class="fa-solid fa-chart-candlestick text-brand-warning"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">3. Price Action & Volume</h4>
+                                <p class="text-sm text-slate-400">Are buyers or sellers in control? Is the volume supporting the current price movement?</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center mr-4 shrink-0 mt-1"><i class="fa-solid fa-link text-purple-400"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">4. Confluence</h4>
+                                <p class="text-sm text-slate-400">Don't rely on just one indicator. Look for 2-3 confirming factors aligning at the same time.</p>
+                            </div>
+                        </li>
+                        <li class="p-4 bg-brand-blue/10 border border-brand-blue/30 rounded-lg text-brand-blue font-semibold text-sm">
+                            <i class="fa-solid fa-lightbulb mr-2"></i> If it's not a "Hell Yes", it's a "No". Wait for A+ setups only.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pre-Trade Checklist -->
+                <div class="fade-in bg-brand-dark p-8 rounded-2xl border border-slate-700 shadow-xl" style="transition-delay: 150ms;">
+                    <h3 class="text-xl font-bold mb-6 text-white flex items-center"><i class="fa-regular fa-square-check mr-3 text-brand-accent"></i> The Pre-Trade Checklist</h3>
+                    <p class="text-sm text-slate-400 mb-6 pb-4 border-b border-slate-800">Ask yourself these exact questions before clicking the 'Buy' or 'Sell' button.</p>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg group-hover:text-brand-accent transition-colors"></i>
+                            <span class="text-slate-300">Is this setup part of my tested trading plan?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">What is my exact, pre-determined entry point?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">Where is my hard Stop Loss level?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">Where is my Target Profit (at least 2x my risk)?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">Am I strictly risking 1% to 2% of my capital?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">Am I feeling emotional (angry, greedy, bored, desperate)?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-regular fa-circle text-slate-600 mt-1 mr-3 text-lg"></i>
+                            <span class="text-slate-300">Is there major economic news coming out soon that will cause unpredictable spikes?</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 5: Low Capital Plan -->
+    <section id="low-capital" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-slate-800">
+        <div class="flex items-center mb-10 fade-in">
+            <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mr-4">
+                <i class="fa-solid fa-seedling text-emerald-500 text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold">Phase 5: How To Start with Low Capital (Proper Plan)</h2>
+        </div>
+        <p class="text-slate-400 mb-8 max-w-3xl fade-in">How not to blow up your account in the first 90 days. Follow this strict framework when starting with small capital (e.g., ₹10,000).</p>
+
+        <!-- Metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 fade-in">
+            <div class="bg-brand-card p-4 rounded-xl border border-slate-700 text-center shadow-lg">
+                <div class="text-2xl font-extrabold text-brand-accent mb-1">₹10,000</div>
+                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Starting Capital</div>
+            </div>
+            <div class="bg-brand-card p-4 rounded-xl border border-slate-700 text-center shadow-lg">
+                <div class="text-2xl font-extrabold text-brand-blue mb-1">₹200</div>
+                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Max Risk Per Trade</div>
+            </div>
+            <div class="bg-brand-card p-4 rounded-xl border border-slate-700 text-center shadow-lg">
+                <div class="text-2xl font-extrabold text-white mb-1">1</div>
+                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Max Open Trade</div>
+            </div>
+            <div class="bg-brand-card p-4 rounded-xl border border-slate-700 text-center shadow-lg">
+                <div class="text-2xl font-extrabold text-brand-warning mb-1">₹1,000</div>
+                <div class="text-slate-400 text-xs font-semibold uppercase tracking-wider">Max Weekly Drawdown</div>
+            </div>
+        </div>
+
+        <!-- The Goal -->
+        <div class="bg-brand-blue/10 border-l-4 border-brand-blue p-6 rounded-r-xl mb-12 fade-in">
+            <h4 class="text-brand-blue font-bold text-lg mb-2">The Goal is 100 Trades</h4>
+            <p class="text-slate-300">A ₹10,000 account isn't to make you rich. It's to teach you how to trade. Your only goal is to place 100 flawless trades following your system. Don't look at the money.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Position Sizing -->
+            <div class="fade-in bg-brand-card p-6 rounded-xl border border-slate-700">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-800 pb-2">Position Sizing: Doing the Math</h3>
+                <ul class="space-y-3 mb-6 font-mono text-sm">
+                    <li class="flex justify-between"><span class="text-slate-400">Total Capital:</span> <span class="text-white">₹10,000</span></li>
+                    <li class="flex justify-between"><span class="text-slate-400">Max Risk per Trade (2%):</span> <span class="text-brand-warning">₹200</span></li>
+                    <li class="flex justify-between"><span class="text-slate-400">Stock Price (Entry):</span> <span class="text-white">₹100</span></li>
+                    <li class="flex justify-between"><span class="text-slate-400">Stop Loss Price:</span> <span class="text-white">₹95</span></li>
+                    <li class="flex justify-between"><span class="text-slate-400">Risk Per Share:</span> <span class="text-brand-blue">₹5</span></li>
+                    <li class="w-full h-px bg-slate-800 my-2"></li>
+                    <li class="flex justify-between font-bold text-brand-accent"><span>Position Size (₹200 / ₹5):</span> <span>40 Shares</span></li>
+                    <li class="flex justify-between font-bold text-brand-accent"><span>Total Capital Deployed:</span> <span>₹4,000</span></li>
+                </ul>
+                <div class="bg-orange-500/10 border border-orange-500/30 p-4 rounded-lg">
+                    <h4 class="text-orange-400 font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation mr-2"></i>No Leverage! Ever.</h4>
+                    <p class="text-orange-200/70 text-xs">By buying 40 shares, you're only using 40% of your total capital. Leaving 60% in cash. This is how you survive. Never use leverage (margin) with a small account.</p>
+                </div>
+            </div>
+
+            <!-- Simulation -->
+            <div class="fade-in bg-brand-card p-6 rounded-xl border border-slate-700" style="transition-delay: 100ms;">
+                <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-800 pb-2">The Math of 100 Trades (A Simulation)</h3>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-brand-warning/10 border border-brand-warning/30 p-4 rounded-lg text-center">
+                        <div class="text-brand-warning font-bold mb-2">50 Losers</div>
+                        <div class="text-slate-400 text-xs">Avg Loss: -₹200</div>
+                        <div class="text-brand-warning font-extrabold mt-1">Total: -₹10,000</div>
+                    </div>
+                    <div class="bg-brand-accent/10 border border-brand-accent/30 p-4 rounded-lg text-center">
+                        <div class="text-brand-accent font-bold mb-2">50 Winners</div>
+                        <div class="text-slate-400 text-xs">Avg Win (1:2): +₹400</div>
+                        <div class="text-brand-accent font-extrabold mt-1">Total: +₹20,000</div>
+                    </div>
+                </div>
+                <div class="bg-slate-900 border border-slate-700 p-4 rounded-lg text-center font-mono">
+                    <div class="text-slate-300 mb-1 text-sm">After 100 Trades (50% Win Rate):</div>
+                    <div class="text-brand-accent font-bold text-lg">Net Profit: +₹10,000</div>
+                    <div class="text-white text-sm">Total Account: ₹20,000 (+100%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Strict Rules -->
+            <div class="md:col-span-2 space-y-6 fade-in">
+                <h3 class="text-xl font-bold text-white border-b border-slate-800 pb-2">Your Strict Rules for the Next 90 Days</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-building-columns text-brand-blue mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">1. Only Trade High Volume Stocks</strong>
+                            <span class="text-slate-400 text-sm">Nifty 50 or Next 50 only. Stay away from illiquid penny stocks.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-ban text-brand-warning mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">2. No Options! No Futures!</strong>
+                            <span class="text-slate-400 text-sm">Cash equity only. Options will destroy a ₹10,000 account in a week.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-1 text-brand-blue mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">3. Maximum 1 Trade Per Day</strong>
+                            <span class="text-slate-400 text-sm">Prevents revenge trading and overtrading. Win or lose, you are done for the day.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-list-check text-brand-blue mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">4. Review Before You Buy</strong>
+                            <span class="text-slate-400 text-sm">Run through your pre-trade checklist. Every. Single. Time.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-arrow-down-up-lock text-brand-warning mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">5. No Averaging Down</strong>
+                            <span class="text-slate-400 text-sm">Ever. If you are wrong, take the ₹200 loss and move on.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-person-walking-arrow-right text-brand-accent mt-1 mr-3 w-5 text-center"></i>
+                        <div>
+                            <strong class="text-white block">6. Walk Away</strong>
+                            <span class="text-slate-400 text-sm">Set the trade, put target and stop loss in the system, and close the app.</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="bg-brand-card border border-slate-700 p-5 rounded-xl">
+                    <h4 class="font-bold text-white mb-2"><i class="fa-solid fa-flag-checkered text-brand-accent mr-2"></i>When to Scale Up (The Milestone)</h4>
+                    <p class="text-slate-400 text-sm mb-3">Do not add more funds until you hit <strong>both</strong> milestones:</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-3">
+                        <div class="bg-slate-800 px-3 py-2 rounded text-sm text-white flex-1"><i class="fa-solid fa-calendar-check text-brand-blue mr-2"></i>3 Months Consistent</div>
+                        <div class="bg-slate-800 px-3 py-2 rounded text-sm text-white flex-1"><i class="fa-solid fa-check-double text-brand-blue mr-2"></i>100 Trades Completed</div>
+                    </div>
+                    <div class="text-brand-warning text-xs font-bold bg-brand-warning/10 p-2 rounded">
+                        Violating the rules sets the clock back to Day 1.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brokerage Trap -->
+            <div class="fade-in bg-slate-900 p-6 rounded-xl border border-slate-800 h-fit" style="transition-delay: 100ms;">
+                <h3 class="text-lg font-bold text-brand-warning mb-4"><i class="fa-solid fa-scissors mr-2"></i>The "Brokerage" Trap</h3>
+                <p class="text-slate-400 text-xs mb-4">Hidden killer of small accounts.</p>
+                <ul class="space-y-2 font-mono text-sm text-slate-300 mb-4">
+                    <li class="flex justify-between"><span>Buy+Sell Brokerage:</span> <span>~₹40</span></li>
+                    <li class="flex justify-between"><span>STT, GST, Stamp:</span> <span>~₹10</span></li>
+                    <li class="w-full h-px bg-slate-700 my-1"></li>
+                    <li class="flex justify-between font-bold text-white"><span>Total Cost per Trade:</span> <span>~₹50</span></li>
+                </ul>
+                <div class="bg-brand-warning/10 border border-brand-warning/30 p-3 rounded text-xs text-brand-warning leading-relaxed">
+                    <strong>Warning:</strong> On a ₹200 risk trade, ₹50 is <span class="font-bold">25% of your risk</span> just in fees! This is why you must take only high probability A+ setups and <em>never</em> overtrade.
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-10 bg-brand-blue/5 border border-brand-blue/20 rounded-xl p-6 text-center fade-in">
+            <p class="text-brand-blue font-semibold">Treat this ₹10,000 as a business expense. A very cheap tuition fee for a life skill.</p>
+        </div>
+    </section>
+
+    <!-- Phase 6: Action Plan & System -->
     <section id="action" class="py-16 bg-slate-900/80 border-t border-slate-800 relative overflow-hidden">
         <!-- Background decoration -->
         <div class="absolute right-0 top-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute left-0 bottom-0 w-80 h-80 bg-brand-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 fade-in">
-                <h2 class="text-3xl font-bold mb-4">Phase 4: Your Action Plan</h2>
-                <p class="text-slate-400">Treat this like a structured corporate project rollout.</p>
+                <h2 class="text-3xl font-bold mb-4">Phase 6: Your Progression Roadmap</h2>
+                <p class="text-slate-400">Treat this like a structured corporate project rollout. Do not skip phases.</p>
             </div>
 
-            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-blue before:to-brand-accent">
+            <!-- The Journal -->
+            <div class="mb-16 fade-in bg-gradient-to-r from-brand-card to-slate-800 p-8 rounded-2xl border border-brand-accent/20 max-w-4xl mx-auto shadow-lg">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                    <div class="w-16 h-16 rounded-full bg-brand-accent/20 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-book-open text-brand-accent text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">The Trading Journal - Your Most Valuable Asset</h3>
+                        <p class="text-slate-400 text-sm mb-4">A trader without a journal is a gambler. You must review weekly/monthly to find patterns in your winning and losing trades.</p>
+                        <div class="bg-slate-900 rounded p-4 border border-slate-700 text-sm text-slate-300 font-mono">
+                            <div class="text-brand-accent mb-2 font-bold">// WHAT TO LOG FOR EVERY TRADE:</div>
+                            <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                <li>• Date & Time</li>
+                                <li>• Asset / Ticker</li>
+                                <li>• Direction (Long/Short)</li>
+                                <li>• Exact Entry Price</li>
+                                <li>• Stop Loss & Take Profit Levels</li>
+                                <li>• Exit Price & Total PnL</li>
+                                <li class="text-brand-warning font-bold">• Emotions before/during/after</li>
+                                <li class="text-brand-warning font-bold">• Mistakes made (be brutally honest)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Roadmap -->
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-blue before:to-brand-accent max-w-4xl mx-auto">
                 
-                <!-- Step 1 -->
+                <!-- Phase 1 -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-blue text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-slate-600 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         1
                     </div>
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
-                        <h3 class="font-bold text-lg mb-1">The "Burn" Capital</h3>
-                        <p class="text-sm text-slate-400">Isolate your trading money. Put it in a separate account and mentally write it off. If losing it changes your lifestyle, it's too much.</p>
+                        <h3 class="font-bold text-lg mb-1 text-white">Paper Trading <span class="text-brand-blue text-sm ml-2">(1-3 Months)</span></h3>
+                        <p class="text-sm text-slate-400">Trade with fake money using platforms like TradingView. Prove your strategy works and master execution without the pressure of real capital.</p>
                     </div>
                 </div>
 
-                <!-- Step 2 -->
+                <!-- Phase 2 -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
                     <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-blue text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         2
                     </div>
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
-                        <h3 class="font-bold text-lg mb-1">Paper Trading (1-2 Mos)</h3>
-                        <p class="text-sm text-slate-400">Use platforms like TradingView with fake money. Prove you can execute your strategy without emotion before touching real cash.</p>
+                        <h3 class="font-bold text-lg mb-1 text-white">Micro-Account <span class="text-brand-blue text-sm ml-2">(3-6 Months)</span></h3>
+                        <p class="text-sm text-slate-400">Trade with a tiny amount of real money (e.g., ₹10,000). The psychology changes instantly when real money is on the line. Learn to manage your emotions with real skin in the game.</p>
                     </div>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Phase 3 -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
-                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-accent text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-emerald-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         3
                     </div>
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
-                        <h3 class="font-bold text-lg mb-1">Micro-Account (3-6 Mos)</h3>
-                        <p class="text-sm text-slate-400">Once profitable on paper, trade a tiny real amount (e.g., ₹10,000). Psychology changes instantly with real stakes. Learn to manage it.</p>
+                        <h3 class="font-bold text-lg mb-1 text-white">Scaling Up <span class="text-brand-accent text-sm ml-2">(6+ Months)</span></h3>
+                        <p class="text-sm text-slate-400">Slowly increase your position size, but <strong>only</strong> after demonstrating consistent profitability and emotional control in the Micro-Account phase.</p>
                     </div>
                 </div>
 
-                <!-- Step 4 -->
+                <!-- Phase 4 -->
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
                     <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-accent text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                         4
                     </div>
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg ring-2 ring-brand-accent/50">
-                        <h3 class="font-bold text-lg mb-1">Keep a Journal</h3>
-                        <p class="text-sm text-slate-400">A trader without a journal is a gambler. Record: Setup, Entry, Target, Stop Loss, Result, and <strong>most importantly: your emotions</strong>.</p>
+                        <h3 class="font-bold text-lg mb-1 text-white">Consistency</h3>
+                        <p class="text-sm text-slate-400">Treat trading as a boring, repetitive, highly structured business. Stick to the blueprint, follow the math, and protect your capital above all else.</p>
                     </div>
                 </div>
 
