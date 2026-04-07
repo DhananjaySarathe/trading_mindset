@@ -59,6 +59,13 @@
             background: #334155;
             border-radius: 2px;
         }
+        
+        .tab-btn { transition: all 0.2s ease; }
+        .tab-btn.active { background-color: #3b82f6; color: white; border-color: #3b82f6; }
+        
+        /* Hide scrollbar for mobile nav */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-accent selection:text-white pb-20">
@@ -67,18 +74,36 @@
     <nav class="fixed w-full z-50 glass-card transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <span class="font-bold text-xl tracking-tight text-white"><i class="fa-solid fa-chart-line text-brand-accent mr-2"></i>Trader's Blueprint</span>
-                <div class="hidden lg:block">
-                    <div class="ml-10 flex items-baseline space-x-3">
-                        <a href="#psychology" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Psychology</a>
-                        <a href="#math" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Math of Survival</a>
-                        <a href="#simulator" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium text-brand-accent">Simulator</a>
-                        <a href="#pitfalls" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Pitfalls</a>
-                        <a href="#execution" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Execution</a>
-                        <a href="#low-capital" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Low Capital Plan</a>
-                        <a href="#action" class="bg-brand-accent text-white px-4 py-2 ml-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
-                    </div>
+                <span class="font-bold text-xl tracking-tight text-white shrink-0"><i class="fa-solid fa-chart-line text-brand-accent mr-2"></i>Trader's Blueprint</span>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden xl:flex items-center space-x-2">
+                    <a href="#psychology" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Psychology</a>
+                    <a href="#simulator" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium text-brand-accent">Simulator</a>
+                    <a href="#execution" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Execution</a>
+                    <a href="#low-capital" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Low Capital Plan</a>
+                    <a href="#action" class="bg-brand-accent text-white px-4 py-2 ml-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
+                    <button onclick="openToolsModal()" class="bg-brand-blue/20 text-brand-blue border border-brand-blue/50 px-4 py-1.5 rounded-full text-sm font-bold hover:bg-brand-blue hover:text-white transition-colors ml-2 flex items-center"><i class="fa-solid fa-toolbox mr-2"></i>Useful Tools</button>
                 </div>
+
+                <!-- Hamburger Button -->
+                <div class="xl:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-brand-dark/95 backdrop-blur-md border-t border-slate-800 absolute w-full left-0 shadow-xl transition-all duration-300 origin-top">
+            <div class="px-4 py-4 space-y-2 flex flex-col max-h-[80vh] overflow-y-auto">
+                <a href="#psychology" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Psychology</a>
+                <a href="#simulator" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-brand-accent hover:text-emerald-400 hover:bg-slate-800">Simulator</a>
+                <a href="#execution" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Execution</a>
+                <a href="#low-capital" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Low Capital Plan</a>
+                <a href="#action" class="mobile-link block px-3 py-3 rounded-md text-base font-bold text-brand-accent hover:text-emerald-400 hover:bg-slate-800">Action Plan</a>
+                <button onclick="openToolsModal(); closeMobileMenu();" class="mt-4 w-full bg-brand-blue/20 text-brand-blue border border-brand-blue/50 px-4 py-3 rounded-lg text-base font-bold hover:bg-brand-blue hover:text-white transition-colors flex items-center justify-center"><i class="fa-solid fa-toolbox mr-2"></i>Useful Tools</button>
             </div>
         </div>
     </nav>
@@ -286,14 +311,14 @@
         </div>
     </section>
 
-    <!-- NEW Phase 2.5: Interactive RR Simulator -->
+    <!-- Phase 2.5: Interactive RR Simulator -->
     <section id="simulator" class="py-16 bg-brand-dark px-4 sm:px-6 lg:px-8 border-y border-slate-800">
         <div class="max-w-6xl mx-auto fade-in">
             <div class="flex flex-col items-center text-center mb-10">
                 <div class="w-16 h-16 rounded-full bg-brand-accent/10 flex items-center justify-center mb-4 border border-brand-accent/20">
                     <i class="fa-solid fa-sliders text-brand-accent text-2xl"></i>
                 </div>
-                <h2 class="text-3xl font-bold mb-4">Risk-Reward & Win Rate Simulator</h2>
+                <h2 class="text-3xl font-bold mb-4">Risk-Reward & Win Rate Simulator (10 Trades)</h2>
                 <p class="text-slate-400 max-w-2xl">Play with the numbers to see how a good Risk:Reward ratio protects you, even if you lose the majority of your trades.</p>
             </div>
 
@@ -367,6 +392,71 @@
                     <div class="text-sm font-semibold text-slate-300 mb-3">Equity Curve</div>
                     <div class="w-full h-64 bg-slate-900 border border-slate-700 rounded-xl p-4">
                         <canvas id="equity-chart" role="img" aria-label="Equity curve showing cumulative P&L across 10 trades"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 2.6: 100 Trades Simulation -->
+    <section id="simulator-100" class="py-16 bg-slate-900/50 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="flex flex-col items-center text-center mb-10">
+                <div class="w-16 h-16 rounded-full bg-brand-blue/10 flex items-center justify-center mb-4 border border-brand-blue/20">
+                    <i class="fa-solid fa-chart-area text-brand-blue text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Want a better picture? Observe a 100 Trades Simulation</h2>
+                <p class="text-slate-400 max-w-2xl">See how different Risk:Reward ratios perform over a larger, more realistic sample size of 100 trades.</p>
+            </div>
+
+            <div class="bg-brand-card border border-slate-700 rounded-2xl shadow-2xl p-6 md:p-8">
+                <!-- Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                        <label class="text-sm text-slate-400 font-medium block mb-2">Win Rate (out of 100 trades)</label>
+                        <div class="text-2xl font-bold text-white mb-4" id="sim100-wr-val">40 wins</div>
+                        <input type="range" min="10" max="90" step="1" value="40" id="sim100-wr-slider" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                        <label class="text-sm text-slate-400 font-medium block mb-2">Risk per Trade (₹)</label>
+                        <div class="text-2xl font-bold text-white mb-4" id="sim100-risk-val">₹500</div>
+                        <input type="range" min="100" max="2000" step="100" value="500" id="sim100-risk-slider" />
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="mb-6">
+                    <label class="text-sm text-slate-400 font-medium block mb-3">Select Risk:Reward Ratio to View Details:</label>
+                    <div class="flex gap-3 flex-wrap" id="sim100-tabs">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Break-even Alert -->
+                <div id="sim100-be-bar" class="bg-brand-blue/10 border-l-4 border-brand-blue p-4 rounded-r-lg text-slate-300 text-sm mb-8 flex items-center">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Metrics -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8" id="sim100-cards">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Equity Chart -->
+                    <div>
+                        <div class="text-sm font-semibold text-slate-300 mb-3">Equity Curve — 100 trades (Randomized W/L)</div>
+                        <div class="w-full h-64 bg-slate-900 border border-slate-700 rounded-xl p-4">
+                            <canvas id="sim100-equity-chart" role="img" aria-label="Equity curve over 100 trades"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Compare Chart -->
+                    <div>
+                        <div class="text-sm font-semibold text-slate-300 mb-3">Net P&L Comparison — All ratios</div>
+                        <div class="w-full h-64 bg-slate-900 border border-slate-700 rounded-xl p-4">
+                            <canvas id="sim100-compare-chart" role="img" aria-label="Bar chart comparing net P&L across all RR ratios"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -743,8 +833,151 @@
         </div>
     </section>
 
+    <!-- Useful Tools Modal -->
+    <div id="tools-modal" class="fixed inset-0 z-[100] hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeToolsModal()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-brand-dark border border-slate-700 rounded-2xl shadow-2xl p-6 md:p-8 scale-95 transition-transform duration-300" id="tools-modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white"><i class="fa-solid fa-toolbox text-brand-blue mr-3"></i>Intraday Toolkit</h2>
+                <button onclick="closeToolsModal()" class="text-slate-400 hover:text-white transition-colors bg-slate-800 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-2 flex-wrap mb-6 border-b border-slate-800 pb-4" id="toolkit-tabs">
+                <button class="tool-tab px-4 py-2 rounded-lg text-sm font-semibold border border-brand-blue bg-brand-blue/20 text-brand-blue" onclick="switchToolTab('pos', this)">Position Calculator</button>
+                <button class="tool-tab px-4 py-2 rounded-lg text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-400 hover:text-white" onclick="switchToolTab('ladder', this)">Price Ladder</button>
+                <button class="tool-tab px-4 py-2 rounded-lg text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-400 hover:text-white" onclick="switchToolTab('streak', this)">Streak + Day Log</button>
+            </div>
+
+            <!-- Tool: Position Calculator -->
+            <div id="tool-pos" class="tool-section block">
+                <p class="text-slate-400 text-sm mb-6">Enter your capital, stock price and SL% — get exact quantity, targets and max risk.</p>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Total capital (₹)</label>
+                        <input type="number" id="p-capital" value="25000" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcPos()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">% risk per trade</label>
+                        <input type="number" id="p-riskpct" value="2" step="0.5" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcPos()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Entry price (₹)</label>
+                        <input type="number" id="p-entry" value="500" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcPos()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Stop loss %</label>
+                        <input type="number" id="p-slpct" value="1" step="0.25" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcPos()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Leverage (1x=no)</label>
+                        <input type="number" id="p-lev" value="2" step="0.5" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcPos()" />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6" id="pos-cards"></div>
+                <div id="pos-alert" class="mb-6"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="rr-cards"></div>
+            </div>
+
+            <!-- Tool: Price Ladder -->
+            <div id="tool-ladder" class="tool-section hidden">
+                <p class="text-slate-400 text-sm mb-6">Visualize P&L at every price step from your entry. Useful for planning exits.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Entry price (₹)</label>
+                        <input type="number" id="l-entry" value="500" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcLadder()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Quantity</label>
+                        <input type="number" id="l-qty" value="50" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcLadder()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">SL price (₹)</label>
+                        <input type="number" id="l-sl" value="495" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcLadder()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Step size (₹)</label>
+                        <input type="number" id="l-step" value="2" step="0.5" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcLadder()" />
+                    </div>
+                </div>
+                <div class="bg-brand-card border border-slate-700 rounded-xl p-4 overflow-x-auto">
+                    <div id="ladder-rows" class="min-w-[400px]"></div>
+                </div>
+            </div>
+
+            <!-- Tool: Streak + Day Log -->
+            <div id="tool-streak" class="tool-section hidden">
+                <p class="text-slate-400 text-sm mb-6">Track today's trades. Click squares to mark W/L. Resets each session.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Starting capital (₹)</label>
+                        <input type="number" id="s-cap" value="25000" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcStreak()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Max trades per day</label>
+                        <input type="number" id="s-max" value="10" class="w-full bg-transparent text-white font-bold outline-none" oninput="initStreak()" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Daily loss limit (₹)</label>
+                        <input type="number" id="s-limit" value="1000" class="w-full bg-transparent text-white font-bold outline-none" oninput="calcStreak()" />
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 mb-6" id="streak-boxes"></div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-4" id="streak-cards"></div>
+                <div id="streak-alert" class="mb-6"></div>
+                
+                <hr class="border-slate-800 my-8" />
+                
+                <h3 class="text-lg font-bold text-white mb-4">Trade log (today)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Stock</label>
+                        <input type="text" id="log-stock" placeholder="eg. RELIANCE" class="w-full bg-transparent text-white font-bold outline-none" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Entry (₹)</label>
+                        <input type="number" id="log-entry" placeholder="500" class="w-full bg-transparent text-white font-bold outline-none" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Exit (₹)</label>
+                        <input type="number" id="log-exit" placeholder="510" class="w-full bg-transparent text-white font-bold outline-none" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl">
+                        <label class="text-xs text-slate-400 font-medium block mb-1">Qty</label>
+                        <input type="number" id="log-qty" placeholder="50" class="w-full bg-transparent text-white font-bold outline-none" />
+                    </div>
+                </div>
+                <div class="flex gap-3 mb-6">
+                    <button class="bg-brand-blue text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-blue-600 transition-colors" onclick="addLog()">Add Trade</button>
+                    <button class="bg-slate-800 text-slate-300 border border-slate-700 px-5 py-2 rounded-lg text-sm font-bold hover:bg-slate-700 transition-colors" onclick="clearLog()">Clear Log</button>
+                </div>
+                
+                <div class="overflow-x-auto bg-slate-900 border border-slate-800 rounded-xl mb-6">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="text-xs text-slate-400 uppercase bg-slate-800/50 border-b border-slate-800">
+                            <tr>
+                                <th class="px-4 py-3">#</th>
+                                <th class="px-4 py-3">Stock</th>
+                                <th class="px-4 py-3">Entry</th>
+                                <th class="px-4 py-3">Exit</th>
+                                <th class="px-4 py-3">Qty</th>
+                                <th class="px-4 py-3">P&L</th>
+                                <th class="px-4 py-3">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="log-body">
+                            <tr><td colspan="7" class="px-4 py-6 text-center text-slate-500 italic">No trades logged yet today.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="log-summary"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Mantra -->
-    <footer class="py-12 border-t border-slate-800 text-center px-4">
+    <footer class="py-12 border-t border-slate-800 text-center px-4 mt-20">
         <div class="max-w-3xl mx-auto fade-in">
             <h4 class="text-slate-500 uppercase tracking-widest text-sm font-bold mb-4">Your Mantra From Today Onward</h4>
             <div class="text-2xl md:text-4xl font-extrabold text-white mb-8">
@@ -789,12 +1022,309 @@
                 }
             });
             
-            // Initialize Simulator
+            // Mobile Menu Logic
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileIcon = mobileBtn.querySelector('i');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')) {
+                    mobileIcon.classList.remove('fa-xmark');
+                    mobileIcon.classList.add('fa-bars');
+                } else {
+                    mobileIcon.classList.remove('fa-bars');
+                    mobileIcon.classList.add('fa-xmark');
+                }
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Set Global Chart Defaults for Dark Theme
+            Chart.defaults.color = '#94a3b8'; // text-slate-400
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.plugins.tooltip.backgroundColor = '#1e293b';
+            Chart.defaults.plugins.tooltip.titleColor = '#fff';
+            Chart.defaults.plugins.tooltip.bodyColor = '#cbd5e1';
+            Chart.defaults.plugins.tooltip.borderColor = '#334155';
+            Chart.defaults.plugins.tooltip.borderWidth = 1;
+            Chart.defaults.plugins.tooltip.padding = 10;
+            Chart.defaults.plugins.tooltip.displayColors = false;
+
+            // Initialize Simulators
             initSimulator();
+            init100TradesSimulator();
+            
+            // Initialize Toolkit
+            initToolkit();
         });
 
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileIcon = document.getElementById('mobile-menu-btn')?.querySelector('i');
+            if(mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                if(mobileIcon) {
+                    mobileIcon.classList.remove('fa-xmark');
+                    mobileIcon.classList.add('fa-bars');
+                }
+            }
+        }
+
         // ----------------------------------------------------
-        // Simulator Logic
+        // Toolkit Modal Logic
+        // ----------------------------------------------------
+        function openToolsModal() {
+            const modal = document.getElementById('tools-modal');
+            const content = document.getElementById('tools-modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+            calcPos();
+        }
+
+        function closeToolsModal() {
+            const modal = document.getElementById('tools-modal');
+            const content = document.getElementById('tools-modal-content');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function switchToolTab(id, btn) {
+            document.querySelectorAll('.tool-section').forEach(s => {
+                s.classList.remove('block');
+                s.classList.add('hidden');
+            });
+            document.querySelectorAll('.tool-tab').forEach(b => {
+                b.className = 'tool-tab px-4 py-2 rounded-lg text-sm font-semibold border border-slate-700 bg-slate-800 text-slate-400 hover:text-white transition-colors';
+            });
+            
+            document.getElementById('tool-' + id).classList.remove('hidden');
+            document.getElementById('tool-' + id).classList.add('block');
+            
+            btn.className = 'tool-tab px-4 py-2 rounded-lg text-sm font-semibold border border-brand-blue bg-brand-blue/20 text-brand-blue transition-colors';
+            
+            if(id === 'ladder') calcLadder();
+            if(id === 'pos') calcPos();
+        }
+
+        let toolkitLog = [];
+        let toolkitStreak = [];
+
+        function initToolkit() {
+            initStreak();
+            renderLog();
+        }
+
+        function fmt(n, dec=0) {
+            const v = dec ? parseFloat(n).toFixed(dec) : Math.round(n);
+            return parseFloat(v).toLocaleString('en-IN', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+        }
+        function fmtPnl(n) { return (n >= 0 ? '+₹' : '-₹') + fmt(Math.abs(n)); }
+        
+        function tkmc(label, val, colorCls) {
+            return `<div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                <div class="text-[11px] text-slate-500 uppercase font-semibold mb-1">${label}</div>
+                <div class="text-lg font-bold ${colorCls}">${val}</div>
+            </div>`;
+        }
+
+        function calcPos() {
+            const cap = +document.getElementById('p-capital').value || 25000;
+            const riskPct = +document.getElementById('p-riskpct').value || 2;
+            const entry = +document.getElementById('p-entry').value || 500;
+            const slPct = +document.getElementById('p-slpct').value || 1;
+            const lev = +document.getElementById('p-lev').value || 1;
+
+            const maxRisk = cap * riskPct / 100;
+            const slPerShare = entry * slPct / 100;
+            const qty = Math.floor(maxRisk / slPerShare);
+            const totalCost = qty * entry;
+            const effectiveCap = cap * lev;
+            const slPrice = parseFloat((entry - slPerShare).toFixed(2));
+            const capitalUsedPct = (totalCost / effectiveCap * 100).toFixed(1);
+
+            document.getElementById('pos-cards').innerHTML =
+                tkmc('Max risk (₹)', '₹' + fmt(maxRisk), 'text-brand-warning') +
+                tkmc('SL per share', '₹' + fmt(slPerShare, 2), 'text-brand-warning') +
+                tkmc('Suggested qty', qty, 'text-brand-blue') +
+                tkmc('Capital used', '₹' + fmt(totalCost), totalCost > effectiveCap ? 'text-brand-warning' : 'text-white') +
+                tkmc('SL price', '₹' + fmt(slPrice, 2), 'text-brand-warning') +
+                tkmc('Cap used %', capitalUsedPct + '%', parseFloat(capitalUsedPct) > 80 ? 'text-orange-400' : 'text-brand-accent');
+
+            const alertBox = document.getElementById('pos-alert');
+            if (totalCost > effectiveCap) {
+                alertBox.innerHTML = `<div class="bg-brand-warning/10 border-l-4 border-brand-warning p-4 text-brand-warning text-sm font-medium">Not enough capital — reduce quantity to ${Math.floor(effectiveCap / entry)} shares or lower the entry price.</div>`;
+            } else if (qty === 0) {
+                alertBox.innerHTML = `<div class="bg-brand-warning/10 border-l-4 border-brand-warning p-4 text-brand-warning text-sm font-medium">SL too tight or risk too low — no shares can be bought. Increase risk % or widen SL.</div>`;
+            } else {
+                alertBox.innerHTML = `<div class="bg-brand-accent/10 border-l-4 border-brand-accent p-4 text-brand-accent text-sm font-medium"><i class="fa-solid fa-check-circle mr-2"></i>Trade looks valid. Qty: ${qty} shares. Risk capped at ₹${fmt(maxRisk)}.</div>`;
+            }
+
+            const rrCards = [
+                { label: '1 : 1', rr: 1 },
+                { label: '1 : 2', rr: 2 },
+                { label: '1 : 3', rr: 3 },
+            ];
+            document.getElementById('rr-cards').innerHTML = rrCards.map(r => {
+                const tgt = parseFloat((entry + slPerShare * r.rr).toFixed(2));
+                const profit = parseFloat((qty * slPerShare * r.rr).toFixed(0));
+                return `<div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                <div class="text-brand-blue font-bold text-sm mb-3">Target RR ${r.label}</div>
+                <div class="flex justify-between text-sm mb-2 text-slate-400"><span>Target price</span><span class="text-white font-medium">₹${fmt(tgt,2)}</span></div>
+                <div class="flex justify-between text-sm mb-2 text-slate-400"><span>Move needed</span><span class="text-white font-medium">${fmt(slPct * r.rr, 2)}%</span></div>
+                <div class="flex justify-between text-sm mb-2 text-slate-400"><span>Profit</span><span class="text-brand-accent font-bold">+₹${fmt(profit)}</span></div>
+                <div class="flex justify-between text-sm text-slate-400"><span>Max loss</span><span class="text-brand-warning font-bold">-₹${fmt(maxRisk)}</span></div>
+                </div>`;
+            }).join('');
+        }
+
+        function calcLadder() {
+            const entry = +document.getElementById('l-entry').value || 500;
+            const qty = +document.getElementById('l-qty').value || 50;
+            const sl = +document.getElementById('l-sl').value || 495;
+            const step = +document.getElementById('l-step').value || 2;
+
+            const maxLoss = (entry - sl) * qty;
+            const prices = [];
+            for (let p = sl; p <= entry + step * 8; p = parseFloat((p + step).toFixed(4))) {
+                prices.push(parseFloat(p.toFixed(2)));
+            }
+
+            const maxProfit = (prices[prices.length - 1] - entry) * qty;
+            const absMax = Math.max(Math.abs(maxLoss), Math.abs(maxProfit));
+
+            document.getElementById('ladder-rows').innerHTML = prices.map(p => {
+                const pnl = (p - entry) * qty;
+                const isSl = Math.abs(p - sl) < step * 0.1;
+                const isEntry = Math.abs(p - entry) < step * 0.1;
+                const barW = Math.max(4, Math.round(Math.abs(pnl) / absMax * 160));
+                const barColor = pnl >= 0 ? '#10b981' : '#ef4444';
+                const bg = isEntry ? 'bg-brand-blue/10' : isSl ? 'bg-brand-warning/10' : 'hover:bg-slate-800/50';
+                const tag = isEntry ? ' <span class="text-[10px] bg-brand-blue/20 text-brand-blue px-2 py-0.5 rounded-full ml-2 uppercase font-bold">entry</span>' :
+                            isSl ? ' <span class="text-[10px] bg-brand-warning/20 text-brand-warning px-2 py-0.5 rounded-full ml-2 uppercase font-bold">SL</span>' : '';
+                return `<div class="flex items-center gap-3 p-2 rounded-lg transition-colors ${bg}">
+                <div class="font-medium text-sm text-slate-300 w-32 flex items-center">₹${fmt(p,2)}${tag}</div>
+                <div class="h-2 rounded-full" style="width:${barW}px; background-color:${barColor};"></div>
+                <div class="ml-auto font-bold text-sm ${pnl >= 0 ? 'text-brand-accent' : 'text-brand-warning'}">${fmtPnl(pnl)}</div>
+                </div>`;
+            }).join('');
+        }
+
+        function initStreak() {
+            const max = +document.getElementById('s-max').value || 10;
+            toolkitStreak = toolkitStreak.slice(0, max);
+            while (toolkitStreak.length < max) toolkitStreak.push('n');
+            renderStreak();
+        }
+
+        function renderStreak() {
+            const box = document.getElementById('streak-boxes');
+            box.innerHTML = toolkitStreak.map((s, i) => {
+                let cls = 'bg-slate-800 text-slate-500 border-slate-700';
+                let text = i + 1;
+                if (s === 'w') { cls = 'bg-brand-accent/20 text-brand-accent border-brand-accent/40 shadow-[0_0_10px_rgba(16,185,129,0.2)]'; text = 'W'; }
+                if (s === 'l') { cls = 'bg-brand-warning/20 text-brand-warning border-brand-warning/40 shadow-[0_0_10px_rgba(239,68,68,0.2)]'; text = 'L'; }
+                return `<button class="w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm cursor-pointer border transition-all ${cls}" onclick="toggleStreak(${i})">${text}</button>`;
+            }).join('');
+            calcStreak();
+        }
+
+        function toggleStreak(i) {
+            const cycle = { n: 'w', w: 'l', l: 'n' };
+            toolkitStreak[i] = cycle[toolkitStreak[i]];
+            renderStreak();
+        }
+
+        function calcStreak() {
+            const cap = +document.getElementById('s-cap').value || 25000;
+            const limit = +document.getElementById('s-limit').value || 1000;
+            const wins = toolkitStreak.filter(s => s === 'w').length;
+            const losses = toolkitStreak.filter(s => s === 'l').length;
+            const done = wins + losses;
+            const logPnl = toolkitLog.reduce((a, t) => a + t.pnl, 0);
+
+            document.getElementById('streak-cards').innerHTML =
+                tkmc('Trades done', done + ' / ' + toolkitStreak.length, 'text-white') +
+                tkmc('Wins', wins, 'text-brand-accent') +
+                tkmc('Losses', losses, 'text-brand-warning') +
+                tkmc('Win rate', done ? Math.round(wins/done*100) + '%' : '—', wins > losses ? 'text-brand-accent' : 'text-white') +
+                tkmc('Log P&L', fmtPnl(logPnl), logPnl >= 0 ? 'text-brand-accent' : 'text-brand-warning') +
+                tkmc('Capital now', '₹' + fmt(cap + logPnl), logPnl >= 0 ? 'text-brand-accent' : 'text-brand-warning');
+
+            const alertBox = document.getElementById('streak-alert');
+            if (logPnl <= -limit) {
+                alertBox.innerHTML = `<div class="bg-brand-warning/10 border-l-4 border-brand-warning p-4 text-brand-warning text-sm font-medium"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Daily loss limit of ₹${fmt(limit)} hit. Stop trading for today — protect your capital.</div>`;
+            } else if (losses >= 3 && wins === 0) {
+                alertBox.innerHTML = `<div class="bg-orange-500/10 border-l-4 border-orange-500 p-4 text-orange-400 text-sm font-medium"><i class="fa-solid fa-circle-exclamation mr-2"></i>3 losses, 0 wins — consider stepping away and reviewing before next trade.</div>`;
+            } else if (wins >= 2 && losses === 0) {
+                alertBox.innerHTML = `<div class="bg-brand-accent/10 border-l-4 border-brand-accent p-4 text-brand-accent text-sm font-medium"><i class="fa-solid fa-check-circle mr-2"></i>Good start — you are up. Stay disciplined, don't get overconfident.</div>`;
+            } else {
+                alertBox.innerHTML = '';
+            }
+        }
+
+        function addLog() {
+            const stock = document.getElementById('log-stock').value || '—';
+            const entry = +document.getElementById('log-entry').value;
+            const exit = +document.getElementById('log-exit').value;
+            const qty = +document.getElementById('log-qty').value;
+            if (!entry || !exit || !qty) return;
+            const pnl = (exit - entry) * qty;
+            toolkitLog.push({ stock, entry, exit, qty, pnl });
+            renderLog();
+            document.getElementById('log-stock').value = '';
+            document.getElementById('log-entry').value = '';
+            document.getElementById('log-exit').value = '';
+            document.getElementById('log-qty').value = '';
+            calcStreak();
+        }
+
+        function clearLog() {
+            toolkitLog = [];
+            renderLog();
+            calcStreak();
+        }
+
+        function renderLog() {
+            const body = document.getElementById('log-body');
+            if (toolkitLog.length === 0) { 
+                body.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-slate-500 italic">No trades logged yet today.</td></tr>'; 
+                document.getElementById('log-summary').innerHTML = '';
+                return; 
+            }
+            body.innerHTML = toolkitLog.map((t, i) =>
+                `<tr class="hover:bg-slate-800/50 transition-colors border-b border-slate-800/50">
+                <td class="px-4 py-3 text-slate-500">${i+1}</td>
+                <td class="px-4 py-3 font-semibold text-white">${t.stock}</td>
+                <td class="px-4 py-3">₹${fmt(t.entry,2)}</td>
+                <td class="px-4 py-3">₹${fmt(t.exit,2)}</td>
+                <td class="px-4 py-3">${t.qty}</td>
+                <td class="px-4 py-3 font-bold ${t.pnl >= 0 ? 'text-brand-accent' : 'text-brand-warning'}">${fmtPnl(t.pnl)}</td>
+                <td class="px-4 py-3"><span class="text-[10px] px-2 py-1 rounded font-bold uppercase ${t.pnl >= 0 ? 'bg-brand-accent/20 text-brand-accent' : 'bg-brand-warning/20 text-brand-warning'}">${t.pnl >= 0 ? 'WIN' : 'LOSS'}</span></td>
+                </tr>`
+            ).join('');
+            
+            const total = toolkitLog.reduce((a, t) => a + t.pnl, 0);
+            document.getElementById('log-summary').innerHTML =
+                tkmc('Total trades', toolkitLog.length, 'text-white') +
+                tkmc('Net Day P&L', fmtPnl(total), total >= 0 ? 'text-brand-accent' : 'text-brand-warning') +
+                tkmc('Avg P&L per trade', fmtPnl(total / toolkitLog.length), total >= 0 ? 'text-brand-accent' : 'text-brand-warning');
+        }
+
+        // ----------------------------------------------------
+        // Simulator Logic (10 Trades)
         // ----------------------------------------------------
         function initSimulator() {
             let rr = 2, wins = 4, riskAmt = 500;
@@ -812,11 +1342,6 @@
 
             function calcBreakeven(r) {
                 return Math.ceil((1 / (1 + r)) * 10);
-            }
-
-            function formatNum(n) {
-                const abs = Math.abs(Math.round(n));
-                return (n >= 0 ? '+₹' : '-₹') + abs.toLocaleString('en-IN');
             }
 
             function render() {
@@ -840,7 +1365,7 @@
                 document.getElementById('m-loss').textContent = '-₹' + loss.toLocaleString('en-IN');
 
                 const netEl = document.getElementById('m-net');
-                netEl.textContent = formatNum(net);
+                netEl.textContent = fmtPnl(net);
                 netEl.className = 'relative z-10 text-xl font-bold ' + (net > 0 ? 'text-brand-accent' : net < 0 ? 'text-brand-warning' : 'text-white');
 
                 const retEl = document.getElementById('m-return');
@@ -862,12 +1387,9 @@
                     b.title = 'Click to toggle result';
                     b.onclick = () => {
                         tradeResults[i] = tradeResults[i] === 'win' ? 'loss' : 'win';
-                        
-                        // Keep slider somewhat in sync if all are clicked, but logic favors the actual grid array over slider for display
                         let manualWins = getWinsFromResults();
                         document.getElementById('wr-slider').value = manualWins;
                         wins = manualWins;
-                        
                         render();
                     };
                     grid.appendChild(b);
@@ -881,7 +1403,7 @@
                 });
 
                 const labels = ['Start', ...tradeResults.map((_, i) => 'T' + (i + 1))];
-                const chartColor = net >= 0 ? '#10b981' : '#ef4444'; // brand-accent or brand-warning
+                const chartColor = net >= 0 ? '#10b981' : '#ef4444'; 
 
                 if (equityChart) {
                     equityChart.data.labels = labels;
@@ -890,10 +1412,6 @@
                     equityChart.data.datasets[0].pointBackgroundColor = equity.map(v => v >= 0 ? '#10b981' : '#ef4444');
                     equityChart.update();
                 } else {
-                    // Set Global Chart Defaults for Dark Theme
-                    Chart.defaults.color = '#94a3b8'; // text-slate-400
-                    Chart.defaults.font.family = "'Inter', sans-serif";
-
                     equityChart = new Chart(document.getElementById('equity-chart'), {
                         type: 'line',
                         data: {
@@ -918,13 +1436,6 @@
                             plugins: { 
                                 legend: { display: false },
                                 tooltip: {
-                                    backgroundColor: '#1e293b',
-                                    titleColor: '#fff',
-                                    bodyColor: '#cbd5e1',
-                                    borderColor: '#334155',
-                                    borderWidth: 1,
-                                    padding: 10,
-                                    displayColors: false,
                                     callbacks: {
                                         label: function(context) {
                                             return 'P&L: ' + (context.raw >= 0 ? '+₹' : '-₹') + Math.abs(context.raw).toLocaleString('en-IN');
@@ -935,7 +1446,7 @@
                             scales: {
                                 y: {
                                     ticks: { callback: v => '₹' + v.toLocaleString('en-IN') },
-                                    grid: { color: 'rgba(51, 65, 85, 0.5)' }, // border-slate-700
+                                    grid: { color: 'rgba(51, 65, 85, 0.5)' },
                                     border: { display: false }
                                 },
                                 x: { 
@@ -948,7 +1459,6 @@
                 }
             }
 
-            // Event Listeners
             document.getElementById('rr-slider').addEventListener('input', e => {
                 rr = parseInt(e.target.value);
                 initTrades();
@@ -966,9 +1476,240 @@
                 render();
             });
 
-            // Initial Render
             initTrades();
             render();
+        }
+
+        // ----------------------------------------------------
+        // Simulator Logic (100 Trades)
+        // ----------------------------------------------------
+        function init100TradesSimulator() {
+            const RATIOS = [1, 1.5, 2, 2.5, 3, 4];
+            let selectedRR = 2;
+            let winRate = 40;
+            let riskAmt = 500;
+            let equityChart = null;
+            let compareChart = null;
+
+            function breakeven(rr) {
+                return Math.ceil((100 / (1 + rr)));
+            }
+
+            function calcNet(rr, wr, risk) {
+                return (wr * risk * rr) - ((100 - wr) * risk);
+            }
+
+            function buildEquity(rr, wr, risk) {
+                const results = [];
+                for (let i = 0; i < 100; i++) results.push(i < wr ? 'win' : 'loss');
+                // Randomize array
+                for (let i = results.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [results[i], results[j]] = [results[j], results[i]];
+                }
+                const equity = [0];
+                results.forEach(t => {
+                    const last = equity[equity.length - 1];
+                    equity.push(last + (t === 'win' ? risk * rr : -risk));
+                });
+                return equity;
+            }
+
+            function renderTabs() {
+                const tabs = document.getElementById('sim100-tabs');
+                tabs.innerHTML = '';
+                RATIOS.forEach(r => {
+                    const t = document.createElement('button');
+                    t.className = `px-5 py-2 rounded-full text-sm font-semibold border tab-btn ${r === selectedRR ? 'active' : 'border-slate-700 bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'}`;
+                    t.textContent = '1 : ' + r;
+                    t.onclick = () => { selectedRR = r; renderAll(); };
+                    tabs.appendChild(t);
+                });
+            }
+
+            function renderCards() {
+                const rr = selectedRR;
+                const wr = winRate;
+                const risk = riskAmt;
+                const losses = 100 - wr;
+                const gross_profit = wr * risk * rr;
+                const gross_loss = losses * risk;
+                const net = gross_profit - gross_loss;
+                const ret = ((net / 25000) * 100).toFixed(1);
+                const be = breakeven(rr);
+
+                const beBar = document.getElementById('sim100-be-bar');
+                let beStatus = '';
+                if (wr > be) beStatus = '<span class="text-brand-accent font-bold"><i class="fa-solid fa-check mr-1"></i> Profitable</span>';
+                else if (wr === be) beStatus = '<span class="text-white font-bold">Exactly at Break-even</span>';
+                else beStatus = '<span class="text-brand-warning font-bold"><i class="fa-solid fa-xmark mr-1"></i> Losing</span>';
+                
+                beBar.innerHTML = `<i class="fa-solid fa-circle-info mr-3 text-lg"></i> 
+                    <span>Break-even for <strong>1:${rr}</strong> → need at least <strong class="text-white">${be} wins</strong> out of 100. 
+                    Your current win rate: <strong class="text-white">${wr} wins</strong> — you are ${beStatus}</span>`;
+
+                const cardsData = [
+                    { label: 'Wins (100)', val: wr, cls: 'text-white' },
+                    { label: 'Losses', val: losses, cls: 'text-white' },
+                    { label: 'Gross profit', val: '+₹' + Math.round(gross_profit).toLocaleString('en-IN'), cls: 'text-brand-accent' },
+                    { label: 'Gross loss', val: '-₹' + Math.round(gross_loss).toLocaleString('en-IN'), cls: 'text-brand-warning' },
+                    { label: 'Net P&L', val: fmtPnl(net), cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning', isNet: true },
+                    { label: 'Return on ₹25k', val: (ret >= 0 ? '+' : '') + ret + '%', cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning' },
+                ];
+
+                const container = document.getElementById('sim100-cards');
+                container.innerHTML = '';
+                cardsData.forEach(d => {
+                    if(d.isNet) {
+                        container.innerHTML += `
+                        <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-brand-blue/50 shadow-lg relative overflow-hidden">
+                            <div class="absolute inset-0 bg-brand-blue/5"></div>
+                            <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">${d.label}</div>
+                            <div class="relative z-10 text-xl font-bold ${d.cls}">${d.val}</div>
+                        </div>`;
+                    } else {
+                        container.innerHTML += `
+                        <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                            <div class="text-xs text-slate-500 uppercase font-semibold mb-1">${d.label}</div>
+                            <div class="text-xl font-bold ${d.cls}">${d.val}</div>
+                        </div>`;
+                    }
+                });
+            }
+
+            function renderEquity() {
+                const equity = buildEquity(selectedRR, winRate, riskAmt);
+                const net = equity[equity.length - 1];
+                const color = net >= 0 ? '#3b82f6' : '#ef4444'; // Use brand-blue for variety
+                const labels = Array.from({ length: 101 }, (_, i) => i === 0 ? 'Start' : 'T' + i);
+
+                if (equityChart) {
+                    equityChart.data.labels = labels;
+                    equityChart.data.datasets[0].data = equity;
+                    equityChart.data.datasets[0].borderColor = color;
+                    equityChart.data.datasets[0].pointBackgroundColor = equity.map(v => v >= 0 ? '#3b82f6' : '#ef4444');
+                    equityChart.update();
+                } else {
+                    equityChart = new Chart(document.getElementById('sim100-equity-chart'), {
+                        type: 'line',
+                        data: {
+                            labels,
+                            datasets: [{
+                                label: 'P&L (₹)',
+                                data: equity,
+                                borderColor: color,
+                                pointRadius: 0, // hide dots for 100 trades to make it look cleaner
+                                pointHoverRadius: 4,
+                                pointBackgroundColor: equity.map(v => v >= 0 ? '#3b82f6' : '#ef4444'),
+                                fill: false,
+                                tension: 0.2,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { 
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return 'P&L: ' + (context.raw >= 0 ? '+₹' : '-₹') + Math.abs(context.raw).toLocaleString('en-IN');
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: { callback: v => '₹' + v.toLocaleString('en-IN'), font: { size: 11 } },
+                                    grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                                    border: { display: false }
+                                },
+                                x: {
+                                    ticks: { autoSkip: true, maxTicksLimit: 11, font: { size: 11 } },
+                                    grid: { display: false },
+                                    border: { color: 'rgba(51, 65, 85, 0.5)' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            function renderCompare() {
+                const nets = RATIOS.map(r => Math.round(calcNet(r, winRate, riskAmt)));
+                const colors = nets.map(n => n >= 0 ? '#10b981' : '#ef4444');
+                const borderColors = RATIOS.map(r => r === selectedRR ? '#3b82f6' : 'transparent');
+
+                if (compareChart) {
+                    compareChart.data.datasets[0].data = nets;
+                    compareChart.data.datasets[0].backgroundColor = colors;
+                    compareChart.data.datasets[0].borderColor = borderColors;
+                    compareChart.update();
+                } else {
+                    compareChart = new Chart(document.getElementById('sim100-compare-chart'), {
+                        type: 'bar',
+                        data: {
+                            labels: RATIOS.map(r => '1:' + r),
+                            datasets: [{
+                                label: 'Net P&L (₹)',
+                                data: nets,
+                                backgroundColor: colors,
+                                borderColor: borderColors,
+                                borderWidth: 2,
+                                borderRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { 
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return 'Net P&L: ' + (context.raw >= 0 ? '+₹' : '-₹') + Math.abs(context.raw).toLocaleString('en-IN');
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: { callback: v => '₹' + v.toLocaleString('en-IN'), font: { size: 11 } },
+                                    grid: { color: 'rgba(51, 65, 85, 0.5)' },
+                                    border: { display: false }
+                                },
+                                x: {
+                                    ticks: { font: { size: 12 }, autoSkip: false },
+                                    grid: { display: false },
+                                    border: { color: 'rgba(51, 65, 85, 0.5)' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            function renderAll() {
+                renderTabs();
+                renderCards();
+                renderEquity();
+                renderCompare();
+            }
+
+            document.getElementById('sim100-wr-slider').addEventListener('input', e => {
+                winRate = parseInt(e.target.value);
+                document.getElementById('sim100-wr-val').textContent = winRate + ' wins';
+                renderAll();
+            });
+
+            document.getElementById('sim100-risk-slider').addEventListener('input', e => {
+                riskAmt = parseInt(e.target.value);
+                document.getElementById('sim100-risk-val').textContent = '₹' + riskAmt;
+                renderAll();
+            });
+
+            renderAll();
         }
     </script>
 </body>
