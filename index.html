@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Corporate Trader's Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#10b981', // Emerald for profit/success
+                            warning: '#ef4444', // Red for losses/warnings
+                            blue: '#3b82f6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-white pb-20">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <span class="font-bold text-xl tracking-tight text-white"><i class="fa-solid fa-chart-line text-brand-accent mr-2"></i>Trader's Blueprint</span>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#psychology" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Psychology</a>
+                        <a href="#math" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Math of Survival</a>
+                        <a href="#pitfalls" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Pitfalls</a>
+                        <a href="#action" class="bg-brand-accent text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center">
+        <div class="inline-block p-2 px-4 rounded-full bg-brand-card border border-slate-700 text-sm font-semibold text-brand-accent mb-6 fade-in">
+            <i class="fa-solid fa-shield-halved mr-2"></i> Built for Corporate Professionals
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 fade-in" style="transition-delay: 100ms;">
+            The Corporate <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-emerald-300">Trader's Blueprint</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 fade-in" style="transition-delay: 200ms;">
+            The market is an impartial machine that transfers wealth from the impatient to the disciplined. Your sole objective in year one is not millions—it's survival.
+        </p>
+
+        <!-- Personal Note Card -->
+        <div class="relative max-w-3xl mx-auto text-left fade-in" style="transition-delay: 300ms;">
+            <div class="absolute -inset-1 bg-gradient-to-r from-brand-blue to-brand-accent rounded-2xl blur opacity-25"></div>
+            <div class="relative bg-brand-card p-8 rounded-2xl border border-slate-700 shadow-2xl">
+                <i class="fa-solid fa-quote-left text-3xl text-brand-blue/50 mb-4"></i>
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed italic">
+                    There's your document, buddy — bookmark it or screenshot it and keep it close. The honest truth is this: 90% of traders fail not because they don't know enough technical analysis — they fail because they skip exactly what's in that document. You're choosing to address this before you start, which already makes you different.
+                </p>
+                <div class="mt-4 flex items-center">
+                    <div class="h-px bg-slate-700 flex-1"></div>
+                    <span class="pl-4 text-sm font-bold text-brand-accent uppercase tracking-wider">Your Buddy</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Phase 1: Psychology -->
+    <section id="psychology" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="flex items-center mb-10 fade-in">
+            <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center mr-4">
+                <i class="fa-solid fa-brain text-brand-blue text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold">Phase 1: The Psychology of a Survivor</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-blue/50 transition-all fade-in">
+                <div class="text-brand-blue text-2xl mb-4"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h3 class="text-xl font-bold mb-3">Reframe Losses as "Expenses"</h3>
+                <p class="text-slate-400 text-sm mb-4">In your corporate job, the company spends money to make money. In trading, losing trades are just your business expenses.</p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800 text-sm">
+                    <span class="text-brand-accent font-bold"><i class="fa-solid fa-check mr-2"></i>The Fix:</span> Accept that a 50% win rate is highly profitable if winners outsize losers.
+                </div>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-brand-warning/50 transition-all fade-in" style="transition-delay: 100ms;">
+                <div class="text-brand-warning text-2xl mb-4"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <h3 class="text-xl font-bold mb-3">The Two Deadly Sins</h3>
+                <ul class="text-slate-400 text-sm space-y-3">
+                    <li><strong class="text-white">FOMO:</strong> Buying at the top because you feel left behind. <br><em class="text-brand-warning">Rule: Missed the setup? Wait for the next train.</em></li>
+                    <li><strong class="text-white">Revenge Trading:</strong> Doubling down immediately after a loss to "win it back". <br><em class="text-brand-warning">Rule: Two losses in a day? Shut the laptop.</em></li>
+                </ul>
+            </div>
+
+            <div class="bg-brand-card p-6 rounded-xl border border-slate-800 hover:border-slate-500/50 transition-all fade-in" style="transition-delay: 200ms;">
+                <div class="text-slate-400 text-2xl mb-4"><i class="fa-solid fa-mug-hot"></i></div>
+                <h3 class="text-xl font-bold mb-3">The "Boredom" Indicator</h3>
+                <p class="text-slate-400 text-sm">Good trading is actually boring. You wait hours or days for a setup, click, and do nothing.</p>
+                <div class="mt-4 p-3 bg-brand-warning/10 rounded border border-brand-warning/20 text-brand-warning text-sm font-medium">
+                    If your heart is racing and palms are sweating... you are gambling, not trading.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 2: Math of Survival -->
+    <section id="math" class="py-16 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center mb-10 fade-in">
+                <div class="w-12 h-12 rounded-full bg-brand-accent/20 flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-calculator text-brand-accent text-xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold">Phase 2: The Math of Survival</h2>
+            </div>
+            
+            <p class="text-slate-400 mb-10 max-w-3xl fade-in">This is the most important section. If you follow these mathematical rules, it is mathematically near-impossible for you to go bankrupt.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Rule of Ruin -->
+                <div class="fade-in">
+                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fa-solid fa-chart-pie text-slate-500 mr-2"></i> The Asymmetry of Loss</h3>
+                    <p class="text-sm text-slate-400 mb-6">Math works against you when you lose. Never let a small loss turn into a big loss.</p>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
+                            <span class="text-brand-warning font-bold">If you lose 10%</span>
+                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                            <span class="text-brand-accent font-bold">You need +11% to break even</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-brand-card p-4 rounded-lg border border-slate-800">
+                            <span class="text-brand-warning font-bold">If you lose 25%</span>
+                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                            <span class="text-brand-accent font-bold">You need +33% to break even</span>
+                        </div>
+                        <div class="flex justify-between items-center bg-brand-warning/10 p-4 rounded-lg border border-brand-warning/30">
+                            <span class="text-brand-warning font-bold">If you lose 50%</span>
+                            <i class="fa-solid fa-arrow-right text-brand-warning"></i>
+                            <span class="text-brand-warning font-bold">You need +100% to break even!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1% Rule -->
+                <div class="fade-in" style="transition-delay: 150ms;">
+                    <div class="bg-gradient-to-br from-brand-card to-slate-900 p-8 rounded-2xl border border-brand-accent/30 shadow-[0_0_30px_rgba(16,185,129,0.1)] relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl"><i class="fa-solid fa-percent"></i></div>
+                        <h3 class="text-2xl font-bold text-white mb-2">The Golden 1% Rule</h3>
+                        <p class="text-brand-accent font-semibold mb-6">Never risk more than 1% to 2% of your Total Capital on a single trade.</p>
+                        
+                        <div class="bg-slate-950/50 rounded-lg p-5 font-mono text-sm border border-slate-800">
+                            <div class="mb-2"><span class="text-slate-500">Capital:</span> <span class="text-white">₹100,000</span></div>
+                            <div class="mb-2"><span class="text-slate-500">1% Max Risk:</span> <span class="text-brand-warning">₹1,000</span></div>
+                            <div class="w-full h-px bg-slate-800 my-3"></div>
+                            <div class="mb-1"><span class="text-brand-blue">Setup:</span> Buy at ₹100, Stop Loss at ₹95</div>
+                            <div class="mb-1"><span class="text-brand-blue">Risk per share:</span> ₹5</div>
+                            <div class="mb-3"><span class="text-brand-blue">Math:</span> ₹1,000 ÷ ₹5 = 200 shares</div>
+                            <div class="bg-brand-accent/20 text-brand-accent p-2 rounded text-xs">
+                                <strong>Result:</strong> If stopped out, you lose exactly ₹1,000 and live to trade tomorrow.
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex items-start text-sm">
+                            <i class="fa-solid fa-scale-balanced text-brand-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-white block">Aim for 1:2 Risk/Reward (R:R)</strong>
+                                <span class="text-slate-400">If risking ₹1,000, target ₹2,000. This way, you can be wrong 50% of the time and still grow your account.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 3: Pitfalls -->
+    <section id="pitfalls" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="flex flex-col items-center text-center mb-12 fade-in">
+            <div class="w-16 h-16 rounded-full bg-brand-warning/10 flex items-center justify-center mb-4 border border-brand-warning/20">
+                <i class="fa-solid fa-skull-crossbones text-brand-warning text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-4">Phase 3: The 4 Fastest Ways to Go Bankrupt</h2>
+            <p class="text-slate-400 max-w-2xl">Avoid these fatal errors at all costs. These are the exact reasons why 90% of retail traders lose their money.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="group bg-brand-card p-6 rounded-xl border-l-4 border-l-brand-warning border-y border-y-slate-800 border-r border-r-slate-800 fade-in">
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-warning transition-colors">1. No Hard Stop Loss</h3>
+                <p class="text-sm text-slate-400">"It will bounce back, I'll just hold it." This turns day trades into forced long-term investments. Always set a system-level stop loss upon entry.</p>
+            </div>
+            <div class="group bg-brand-card p-6 rounded-xl border-l-4 border-l-brand-warning border-y border-y-slate-800 border-r border-r-slate-800 fade-in" style="transition-delay: 100ms;">
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-warning transition-colors">2. Averaging Down on a Loser</h3>
+                <p class="text-sm text-slate-400">Throwing good money after bad. Only average up on <em>winners</em>. Never average down on day or swing trades hoping for a bounce.</p>
+            </div>
+            <div class="group bg-brand-card p-6 rounded-xl border-l-4 border-l-brand-warning border-y border-y-slate-800 border-r border-r-slate-800 fade-in" style="transition-delay: 200ms;">
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-warning transition-colors">3. Using High Leverage/Margin</h3>
+                <p class="text-sm text-slate-400">Brokers offer 5x or 10x leverage. For beginners, this is financial suicide. It amplifies gains, but dramatically amplifies losses. Trade pure cash in Year 1.</p>
+            </div>
+            <div class="group bg-brand-card p-6 rounded-xl border-l-4 border-l-brand-warning border-y border-y-slate-800 border-r border-r-slate-800 fade-in" style="transition-delay: 300ms;">
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-warning transition-colors">4. Trading the P&L, Not the Chart</h3>
+                <p class="text-sm text-slate-400">"I just need ₹2,000 more for a vacation." This forces trades that aren't there. The market doesn't care about your goals. Trade setups, ignore the money.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 4: Action Plan -->
+    <section id="action" class="py-16 bg-slate-900/80 border-t border-slate-800 relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute right-0 top-0 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute left-0 bottom-0 w-80 h-80 bg-brand-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl font-bold mb-4">Phase 4: Your Action Plan</h2>
+                <p class="text-slate-400">Treat this like a structured corporate project rollout.</p>
+            </div>
+
+            <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-brand-blue before:to-brand-accent">
+                
+                <!-- Step 1 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-blue text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        1
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
+                        <h3 class="font-bold text-lg mb-1">The "Burn" Capital</h3>
+                        <p class="text-sm text-slate-400">Isolate your trading money. Put it in a separate account and mentally write it off. If losing it changes your lifestyle, it's too much.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-blue text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        2
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
+                        <h3 class="font-bold text-lg mb-1">Paper Trading (1-2 Mos)</h3>
+                        <p class="text-sm text-slate-400">Use platforms like TradingView with fake money. Prove you can execute your strategy without emotion before touching real cash.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-accent text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        3
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg">
+                        <h3 class="font-bold text-lg mb-1">Micro-Account (3-6 Mos)</h3>
+                        <p class="text-sm text-slate-400">Once profitable on paper, trade a tiny real amount (e.g., ₹10,000). Psychology changes instantly with real stakes. Learn to manage it.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group fade-in">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-900 bg-brand-accent text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                        4
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-brand-card p-5 rounded-xl border border-slate-700 shadow-lg ring-2 ring-brand-accent/50">
+                        <h3 class="font-bold text-lg mb-1">Keep a Journal</h3>
+                        <p class="text-sm text-slate-400">A trader without a journal is a gambler. Record: Setup, Entry, Target, Stop Loss, Result, and <strong>most importantly: your emotions</strong>.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Mantra -->
+    <footer class="py-12 border-t border-slate-800 text-center px-4">
+        <div class="max-w-3xl mx-auto fade-in">
+            <h4 class="text-slate-500 uppercase tracking-widest text-sm font-bold mb-4">Your Mantra From Today Onward</h4>
+            <div class="text-2xl md:text-4xl font-extrabold text-white mb-8">
+                "I am a <span class="text-brand-accent">risk manager</span> first,<br>and a trader second."
+            </div>
+            <p class="text-slate-600 text-sm">Design & Logic specifically formulated for sustainable trading success.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach((el) => {
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-lg');
+                    navbar.classList.replace('glass-card', 'bg-brand-dark/95');
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                    navbar.classList.replace('bg-brand-dark/95', 'glass-card');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
