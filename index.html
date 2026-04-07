@@ -66,6 +66,9 @@
         /* Hide scrollbar for mobile nav */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Dynamic Grid for Metrics */
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 1rem; }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-accent selection:text-white pb-20">
@@ -324,7 +327,7 @@
 
             <div class="bg-brand-card border border-slate-700 rounded-2xl shadow-2xl p-6 md:p-8">
                 <!-- Controls -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
                         <label class="text-sm text-slate-400 font-medium block mb-2">Risk : Reward Ratio</label>
                         <div class="text-2xl font-bold text-white mb-4" id="rr-display">1 : 2</div>
@@ -342,13 +345,22 @@
                     </div>
                 </div>
 
+                <!-- Brokerage Toggle -->
+                <div class="flex justify-center mb-8">
+                    <label class="inline-flex items-center cursor-pointer bg-slate-900 border border-slate-700 px-5 py-3 rounded-xl hover:bg-slate-800 transition-colors shadow-inner">
+                        <input type="checkbox" id="sim10-brok-toggle" class="sr-only peer">
+                        <div class="relative w-11 h-6 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-300 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+                        <span class="ms-3 text-sm font-medium text-slate-300">Include Brokerage (~₹50 / trade)</span>
+                    </label>
+                </div>
+
                 <!-- Note -->
                 <div id="breakeven-note" class="bg-brand-blue/10 border-l-4 border-brand-blue p-4 rounded-r-lg text-slate-300 text-sm mb-8 flex items-center">
                     <!-- Updated via JS -->
                 </div>
 
-                <!-- Metrics -->
-                <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
+                <!-- Metrics (Dynamic Grid to accommodate the Brokerage Card seamlessly) -->
+                <div class="metrics-grid mb-8">
                     <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
                         <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Wins (10)</div>
                         <div class="text-xl font-bold text-white" id="m-wins">4</div>
@@ -365,6 +377,14 @@
                         <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Gross Loss</div>
                         <div class="text-xl font-bold text-brand-warning" id="m-loss">-₹3,000</div>
                     </div>
+                    
+                    <!-- Conditionally shown Brokerage Card -->
+                    <div id="m-brok-card" class="hidden bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-orange-500/50 shadow-lg relative overflow-hidden">
+                        <div class="absolute inset-0 bg-orange-500/5"></div>
+                        <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">Total Brokerage</div>
+                        <div class="relative z-10 text-xl font-bold text-orange-400" id="m-brok">-₹500</div>
+                    </div>
+
                     <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-brand-accent/50 shadow-lg relative overflow-hidden">
                         <div class="absolute inset-0 bg-brand-accent/5"></div>
                         <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">Net P&L</div>
@@ -424,6 +444,15 @@
                     </div>
                 </div>
 
+                <!-- Brokerage Toggle 100 -->
+                <div class="flex justify-center mb-8">
+                    <label class="inline-flex items-center cursor-pointer bg-slate-900 border border-slate-700 px-5 py-3 rounded-xl hover:bg-slate-800 transition-colors shadow-inner">
+                        <input type="checkbox" id="sim100-brok-toggle" class="sr-only peer">
+                        <div class="relative w-11 h-6 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-300 after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-500"></div>
+                        <span class="ms-3 text-sm font-medium text-slate-300">Include Brokerage (~₹50 / trade)</span>
+                    </label>
+                </div>
+
                 <!-- Tabs -->
                 <div class="mb-6">
                     <label class="text-sm text-slate-400 font-medium block mb-3">Select Risk:Reward Ratio to View Details:</label>
@@ -438,7 +467,7 @@
                 </div>
 
                 <!-- Metrics -->
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8" id="sim100-cards">
+                <div class="metrics-grid mb-8" id="sim100-cards">
                     <!-- Populated by JS -->
                 </div>
 
@@ -1330,6 +1359,7 @@
             let rr = 2, wins = 4, riskAmt = 500;
             let tradeResults = [];
             let equityChart = null;
+            let includeBrok = false;
 
             function initTrades() {
                 tradeResults = [];
@@ -1349,7 +1379,8 @@
                 const losses = 10 - currentWins;
                 const profit = currentWins * riskAmt * rr;
                 const loss = losses * riskAmt;
-                const net = profit - loss;
+                const totalBrok = includeBrok ? 10 * 50 : 0;
+                const net = profit - loss - totalBrok;
                 const ret = (net / 25000) * 100;
                 const be = calcBreakeven(rr);
 
@@ -1363,6 +1394,14 @@
                 document.getElementById('m-losses').textContent = losses;
                 document.getElementById('m-profit').textContent = '+₹' + profit.toLocaleString('en-IN');
                 document.getElementById('m-loss').textContent = '-₹' + loss.toLocaleString('en-IN');
+
+                const brokCard = document.getElementById('m-brok-card');
+                if (includeBrok) {
+                    brokCard.classList.remove('hidden');
+                    document.getElementById('m-brok').textContent = '-₹' + totalBrok.toLocaleString('en-IN');
+                } else {
+                    brokCard.classList.add('hidden');
+                }
 
                 const netEl = document.getElementById('m-net');
                 netEl.textContent = fmtPnl(net);
@@ -1399,7 +1438,8 @@
                 const equity = [0];
                 tradeResults.forEach(t => {
                     const last = equity[equity.length - 1];
-                    equity.push(last + (t === 'win' ? riskAmt * rr : -riskAmt));
+                    const brokFee = includeBrok ? 50 : 0;
+                    equity.push(last + (t === 'win' ? riskAmt * rr : -riskAmt) - brokFee);
                 });
 
                 const labels = ['Start', ...tradeResults.map((_, i) => 'T' + (i + 1))];
@@ -1459,6 +1499,11 @@
                 }
             }
 
+            document.getElementById('sim10-brok-toggle').addEventListener('change', e => {
+                includeBrok = e.target.checked;
+                render();
+            });
+
             document.getElementById('rr-slider').addEventListener('input', e => {
                 rr = parseInt(e.target.value);
                 initTrades();
@@ -1490,13 +1535,15 @@
             let riskAmt = 500;
             let equityChart = null;
             let compareChart = null;
+            let includeBrok = false;
 
             function breakeven(rr) {
                 return Math.ceil((100 / (1 + rr)));
             }
 
             function calcNet(rr, wr, risk) {
-                return (wr * risk * rr) - ((100 - wr) * risk);
+                const totalBrok = includeBrok ? 100 * 50 : 0;
+                return (wr * risk * rr) - ((100 - wr) * risk) - totalBrok;
             }
 
             function buildEquity(rr, wr, risk) {
@@ -1510,7 +1557,8 @@
                 const equity = [0];
                 results.forEach(t => {
                     const last = equity[equity.length - 1];
-                    equity.push(last + (t === 'win' ? risk * rr : -risk));
+                    const brokFee = includeBrok ? 50 : 0;
+                    equity.push(last + (t === 'win' ? risk * rr : -risk) - brokFee);
                 });
                 return equity;
             }
@@ -1534,7 +1582,8 @@
                 const losses = 100 - wr;
                 const gross_profit = wr * risk * rr;
                 const gross_loss = losses * risk;
-                const net = gross_profit - gross_loss;
+                const totalBrok = includeBrok ? 100 * 50 : 0;
+                const net = gross_profit - gross_loss - totalBrok;
                 const ret = ((net / 25000) * 100).toFixed(1);
                 const be = breakeven(rr);
 
@@ -1552,10 +1601,17 @@
                     { label: 'Wins (100)', val: wr, cls: 'text-white' },
                     { label: 'Losses', val: losses, cls: 'text-white' },
                     { label: 'Gross profit', val: '+₹' + Math.round(gross_profit).toLocaleString('en-IN'), cls: 'text-brand-accent' },
-                    { label: 'Gross loss', val: '-₹' + Math.round(gross_loss).toLocaleString('en-IN'), cls: 'text-brand-warning' },
-                    { label: 'Net P&L', val: fmtPnl(net), cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning', isNet: true },
-                    { label: 'Return on ₹25k', val: (ret >= 0 ? '+' : '') + ret + '%', cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning' },
+                    { label: 'Gross loss', val: '-₹' + Math.round(gross_loss).toLocaleString('en-IN'), cls: 'text-brand-warning' }
                 ];
+                
+                if (includeBrok) {
+                    cardsData.push({ label: 'Brokerage', val: '-₹' + totalBrok.toLocaleString('en-IN'), cls: 'text-orange-400' });
+                }
+
+                cardsData.push(
+                    { label: 'Net P&L', val: fmtPnl(net), cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning', isNet: true },
+                    { label: 'Return on ₹25k', val: (ret >= 0 ? '+' : '') + ret + '%', cls: net >= 0 ? 'text-brand-accent' : 'text-brand-warning' }
+                );
 
                 const container = document.getElementById('sim100-cards');
                 container.innerHTML = '';
@@ -1564,6 +1620,13 @@
                         container.innerHTML += `
                         <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-brand-blue/50 shadow-lg relative overflow-hidden">
                             <div class="absolute inset-0 bg-brand-blue/5"></div>
+                            <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">${d.label}</div>
+                            <div class="relative z-10 text-xl font-bold ${d.cls}">${d.val}</div>
+                        </div>`;
+                    } else if (d.label === 'Brokerage') {
+                        container.innerHTML += `
+                        <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-orange-500/50 shadow-lg relative overflow-hidden">
+                            <div class="absolute inset-0 bg-orange-500/5"></div>
                             <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">${d.label}</div>
                             <div class="relative z-10 text-xl font-bold ${d.cls}">${d.val}</div>
                         </div>`;
@@ -1580,7 +1643,7 @@
             function renderEquity() {
                 const equity = buildEquity(selectedRR, winRate, riskAmt);
                 const net = equity[equity.length - 1];
-                const color = net >= 0 ? '#3b82f6' : '#ef4444'; // Use brand-blue for variety
+                const color = net >= 0 ? '#3b82f6' : '#ef4444'; 
                 const labels = Array.from({ length: 101 }, (_, i) => i === 0 ? 'Start' : 'T' + i);
 
                 if (equityChart) {
@@ -1598,7 +1661,7 @@
                                 label: 'P&L (₹)',
                                 data: equity,
                                 borderColor: color,
-                                pointRadius: 0, // hide dots for 100 trades to make it look cleaner
+                                pointRadius: 0, 
                                 pointHoverRadius: 4,
                                 pointBackgroundColor: equity.map(v => v >= 0 ? '#3b82f6' : '#ef4444'),
                                 fill: false,
@@ -1696,6 +1759,11 @@
                 renderEquity();
                 renderCompare();
             }
+
+            document.getElementById('sim100-brok-toggle').addEventListener('change', e => {
+                includeBrok = e.target.checked;
+                renderAll();
+            });
 
             document.getElementById('sim100-wr-slider').addEventListener('input', e => {
                 winRate = parseInt(e.target.value);
