@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for the Simulator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -32,6 +35,30 @@
         .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        
+        /* Custom styles for range sliders to match dark theme */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #10b981;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #334155;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-accent selection:text-white pb-20">
@@ -42,13 +69,14 @@
             <div class="flex items-center justify-between h-16">
                 <span class="font-bold text-xl tracking-tight text-white"><i class="fa-solid fa-chart-line text-brand-accent mr-2"></i>Trader's Blueprint</span>
                 <div class="hidden lg:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#psychology" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Psychology</a>
-                        <a href="#math" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Math of Survival</a>
-                        <a href="#pitfalls" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Pitfalls</a>
-                        <a href="#execution" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Execution</a>
-                        <a href="#low-capital" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Low Capital Plan</a>
-                        <a href="#action" class="bg-brand-accent text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
+                    <div class="ml-10 flex items-baseline space-x-3">
+                        <a href="#psychology" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Psychology</a>
+                        <a href="#math" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Math of Survival</a>
+                        <a href="#simulator" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium text-brand-accent">Simulator</a>
+                        <a href="#pitfalls" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Pitfalls</a>
+                        <a href="#execution" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Execution</a>
+                        <a href="#low-capital" class="hover:text-brand-accent transition-colors px-2 py-2 rounded-md text-sm font-medium">Low Capital Plan</a>
+                        <a href="#action" class="bg-brand-accent text-white px-4 py-2 ml-2 rounded-full text-sm font-bold hover:bg-emerald-400 transition-colors">Action Plan</a>
                     </div>
                 </div>
             </div>
@@ -252,6 +280,93 @@
                                 <span class="text-slate-400">If risking ₹1,000, your target must be at least ₹2,000. With a 1:2 R:R, you can be wrong 50% of the time and still grow your account.</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW Phase 2.5: Interactive RR Simulator -->
+    <section id="simulator" class="py-16 bg-brand-dark px-4 sm:px-6 lg:px-8 border-y border-slate-800">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="flex flex-col items-center text-center mb-10">
+                <div class="w-16 h-16 rounded-full bg-brand-accent/10 flex items-center justify-center mb-4 border border-brand-accent/20">
+                    <i class="fa-solid fa-sliders text-brand-accent text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-4">Risk-Reward & Win Rate Simulator</h2>
+                <p class="text-slate-400 max-w-2xl">Play with the numbers to see how a good Risk:Reward ratio protects you, even if you lose the majority of your trades.</p>
+            </div>
+
+            <div class="bg-brand-card border border-slate-700 rounded-2xl shadow-2xl p-6 md:p-8">
+                <!-- Controls -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                        <label class="text-sm text-slate-400 font-medium block mb-2">Risk : Reward Ratio</label>
+                        <div class="text-2xl font-bold text-white mb-4" id="rr-display">1 : 2</div>
+                        <input type="range" min="1" max="4" step="1" value="2" id="rr-slider" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                        <label class="text-sm text-slate-400 font-medium block mb-2">Win Rate (out of 10)</label>
+                        <div class="text-2xl font-bold text-white mb-4" id="wr-display">4 wins</div>
+                        <input type="range" min="1" max="10" step="1" value="4" id="wr-slider" />
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                        <label class="text-sm text-slate-400 font-medium block mb-2">Risk per Trade (₹)</label>
+                        <div class="text-2xl font-bold text-white mb-4" id="risk-display">₹500</div>
+                        <input type="range" min="200" max="2000" step="100" value="500" id="risk-slider" />
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div id="breakeven-note" class="bg-brand-blue/10 border-l-4 border-brand-blue p-4 rounded-r-lg text-slate-300 text-sm mb-8 flex items-center">
+                    <!-- Updated via JS -->
+                </div>
+
+                <!-- Metrics -->
+                <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                        <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Wins (10)</div>
+                        <div class="text-xl font-bold text-white" id="m-wins">4</div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                        <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Losses</div>
+                        <div class="text-xl font-bold text-white" id="m-losses">6</div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                        <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Gross Profit</div>
+                        <div class="text-xl font-bold text-brand-accent" id="m-profit">+₹4,000</div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                        <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Gross Loss</div>
+                        <div class="text-xl font-bold text-brand-warning" id="m-loss">-₹3,000</div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center ring-1 ring-brand-accent/50 shadow-lg relative overflow-hidden">
+                        <div class="absolute inset-0 bg-brand-accent/5"></div>
+                        <div class="relative z-10 text-xs text-slate-500 uppercase font-semibold mb-1">Net P&L</div>
+                        <div class="relative z-10 text-xl font-bold" id="m-net">+₹1,000</div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl text-center">
+                        <div class="text-xs text-slate-500 uppercase font-semibold mb-1">Return on ₹25k</div>
+                        <div class="text-xl font-bold" id="m-return">+4.0%</div>
+                    </div>
+                </div>
+
+                <!-- Interactive Grid -->
+                <div class="mb-8">
+                    <div class="text-sm font-semibold text-slate-300 mb-3 flex justify-between items-end">
+                        <span>Trade Timeline Simulation</span>
+                        <span class="text-xs text-slate-500 font-normal">Click boxes to manually toggle W/L</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2" id="trades-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div>
+                    <div class="text-sm font-semibold text-slate-300 mb-3">Equity Curve</div>
+                    <div class="w-full h-64 bg-slate-900 border border-slate-700 rounded-xl p-4">
+                        <canvas id="equity-chart" role="img" aria-label="Equity curve showing cumulative P&L across 10 trades"></canvas>
                     </div>
                 </div>
             </div>
@@ -639,8 +754,9 @@
         </div>
     </footer>
 
-    <!-- Scroll Animation Script -->
+    <!-- Scripts -->
     <script>
+        // Scroll Animations
         document.addEventListener("DOMContentLoaded", function() {
             const observerOptions = {
                 root: null,
@@ -672,7 +788,188 @@
                     navbar.classList.replace('bg-brand-dark/95', 'glass-card');
                 }
             });
+            
+            // Initialize Simulator
+            initSimulator();
         });
+
+        // ----------------------------------------------------
+        // Simulator Logic
+        // ----------------------------------------------------
+        function initSimulator() {
+            let rr = 2, wins = 4, riskAmt = 500;
+            let tradeResults = [];
+            let equityChart = null;
+
+            function initTrades() {
+                tradeResults = [];
+                for (let i = 0; i < 10; i++) tradeResults.push(i < wins ? 'win' : 'loss');
+            }
+
+            function getWinsFromResults() {
+                return tradeResults.filter(t => t === 'win').length;
+            }
+
+            function calcBreakeven(r) {
+                return Math.ceil((1 / (1 + r)) * 10);
+            }
+
+            function formatNum(n) {
+                const abs = Math.abs(Math.round(n));
+                return (n >= 0 ? '+₹' : '-₹') + abs.toLocaleString('en-IN');
+            }
+
+            function render() {
+                const currentWins = getWinsFromResults();
+                const losses = 10 - currentWins;
+                const profit = currentWins * riskAmt * rr;
+                const loss = losses * riskAmt;
+                const net = profit - loss;
+                const ret = (net / 25000) * 100;
+                const be = calcBreakeven(rr);
+
+                // Update Display Text
+                document.getElementById('rr-display').textContent = '1 : ' + rr;
+                document.getElementById('wr-display').textContent = wins + ' wins';
+                document.getElementById('risk-display').textContent = '₹' + riskAmt;
+
+                // Update Metrics
+                document.getElementById('m-wins').textContent = currentWins;
+                document.getElementById('m-losses').textContent = losses;
+                document.getElementById('m-profit').textContent = '+₹' + profit.toLocaleString('en-IN');
+                document.getElementById('m-loss').textContent = '-₹' + loss.toLocaleString('en-IN');
+
+                const netEl = document.getElementById('m-net');
+                netEl.textContent = formatNum(net);
+                netEl.className = 'relative z-10 text-xl font-bold ' + (net > 0 ? 'text-brand-accent' : net < 0 ? 'text-brand-warning' : 'text-white');
+
+                const retEl = document.getElementById('m-return');
+                retEl.textContent = (ret >= 0 ? '+' : '') + ret.toFixed(1) + '%';
+                retEl.className = 'text-xl font-bold ' + (ret > 0 ? 'text-brand-accent' : ret < 0 ? 'text-brand-warning' : 'text-white');
+
+                // Update Breakeven Note
+                const note = document.getElementById('breakeven-note');
+                note.innerHTML = `<i class="fa-solid fa-circle-info mr-3 text-lg"></i> <span><strong>Break-even Check:</strong> For a 1:${rr} ratio, you need at least <strong class="text-white">${be} wins</strong> out of 10 to not lose money.</span>`;
+
+                // Render Trade Grid Boxes
+                const grid = document.getElementById('trades-grid');
+                grid.innerHTML = '';
+                tradeResults.forEach((t, i) => {
+                    const b = document.createElement('button');
+                    b.className = `w-12 h-12 rounded flex items-center justify-center font-bold text-sm cursor-pointer transition-colors border shadow-sm 
+                        ${t === 'win' ? 'bg-brand-accent/20 text-brand-accent border-brand-accent/40 hover:bg-brand-accent/30' : 'bg-brand-warning/20 text-brand-warning border-brand-warning/40 hover:bg-brand-warning/30'}`;
+                    b.textContent = t === 'win' ? 'W' : 'L';
+                    b.title = 'Click to toggle result';
+                    b.onclick = () => {
+                        tradeResults[i] = tradeResults[i] === 'win' ? 'loss' : 'win';
+                        
+                        // Keep slider somewhat in sync if all are clicked, but logic favors the actual grid array over slider for display
+                        let manualWins = getWinsFromResults();
+                        document.getElementById('wr-slider').value = manualWins;
+                        wins = manualWins;
+                        
+                        render();
+                    };
+                    grid.appendChild(b);
+                });
+
+                // Prepare Chart Data
+                const equity = [0];
+                tradeResults.forEach(t => {
+                    const last = equity[equity.length - 1];
+                    equity.push(last + (t === 'win' ? riskAmt * rr : -riskAmt));
+                });
+
+                const labels = ['Start', ...tradeResults.map((_, i) => 'T' + (i + 1))];
+                const chartColor = net >= 0 ? '#10b981' : '#ef4444'; // brand-accent or brand-warning
+
+                if (equityChart) {
+                    equityChart.data.labels = labels;
+                    equityChart.data.datasets[0].data = equity;
+                    equityChart.data.datasets[0].borderColor = chartColor;
+                    equityChart.data.datasets[0].pointBackgroundColor = equity.map(v => v >= 0 ? '#10b981' : '#ef4444');
+                    equityChart.update();
+                } else {
+                    // Set Global Chart Defaults for Dark Theme
+                    Chart.defaults.color = '#94a3b8'; // text-slate-400
+                    Chart.defaults.font.family = "'Inter', sans-serif";
+
+                    equityChart = new Chart(document.getElementById('equity-chart'), {
+                        type: 'line',
+                        data: {
+                            labels,
+                            datasets: [{
+                                label: 'Cumulative P&L (₹)',
+                                data: equity,
+                                borderColor: chartColor,
+                                pointBackgroundColor: equity.map(v => v >= 0 ? '#10b981' : '#ef4444'),
+                                pointBorderColor: '#0f172a',
+                                pointBorderWidth: 2,
+                                pointRadius: 5,
+                                pointHoverRadius: 7,
+                                fill: false,
+                                tension: 0.3,
+                                borderWidth: 3
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { 
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: '#1e293b',
+                                    titleColor: '#fff',
+                                    bodyColor: '#cbd5e1',
+                                    borderColor: '#334155',
+                                    borderWidth: 1,
+                                    padding: 10,
+                                    displayColors: false,
+                                    callbacks: {
+                                        label: function(context) {
+                                            return 'P&L: ' + (context.raw >= 0 ? '+₹' : '-₹') + Math.abs(context.raw).toLocaleString('en-IN');
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: { callback: v => '₹' + v.toLocaleString('en-IN') },
+                                    grid: { color: 'rgba(51, 65, 85, 0.5)' }, // border-slate-700
+                                    border: { display: false }
+                                },
+                                x: { 
+                                    grid: { display: false },
+                                    border: { color: 'rgba(51, 65, 85, 0.5)' }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Event Listeners
+            document.getElementById('rr-slider').addEventListener('input', e => {
+                rr = parseInt(e.target.value);
+                initTrades();
+                render();
+            });
+
+            document.getElementById('wr-slider').addEventListener('input', e => {
+                wins = parseInt(e.target.value);
+                initTrades();
+                render();
+            });
+
+            document.getElementById('risk-slider').addEventListener('input', e => {
+                riskAmt = parseInt(e.target.value);
+                render();
+            });
+
+            // Initial Render
+            initTrades();
+            render();
+        }
     </script>
 </body>
 </html>
